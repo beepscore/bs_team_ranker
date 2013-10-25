@@ -7,13 +7,7 @@ require_relative '../lib/game_results'
 
 class GameResultsTest < MiniTest::Unit::TestCase
 
-  def setup()
-  end
-
-  def teardown()
-  end
-
-  def test_new_sets_file_encoding()
+  def test_new_sets_file_encoding
     # Terminal file command shows
     # $ file sample-input.txt
     # sample-input.txt: ASCII text
@@ -46,7 +40,7 @@ class GameResultsTest < MiniTest::Unit::TestCase
     assert_equal(expected_result, actual_result)
   end
 
-  def test_new_sets_file_string()
+  def test_new_sets_file_string
 
     a_game_results = GameResults.new('./sample-input.txt', 'utf-8')
     actual_result = a_game_results.file_string
@@ -76,7 +70,7 @@ END
     assert_equal(expected_result, actual_result)
   end
 
-  def test_configure_games()
+  def test_configure_games
     a_game_results = GameResults.new('./sample-input.txt', 'utf-8')
     a_game_results.configure_games
     actual_count = a_game_results.games_array.count
