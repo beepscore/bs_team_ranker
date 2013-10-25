@@ -6,6 +6,7 @@ require 'bundler/setup'
 require 'rake'
 require 'rake/testtask'
 require_relative 'test/game_results_test'
+require_relative 'test/team_test'
 
 
 # http://rake.rubyforge.org/
