@@ -17,7 +17,9 @@ class GameResultsTest < MiniTest::Unit::TestCase
     # Terminal file command shows
     # $ file sample-input.txt
     # sample-input.txt: ASCII text
-    #
+    # $ file -I sample-input.txt
+    # sample-input.txt: text/plain; charset=us-ascii
+
     # sample-input.txt team names don't have accented characters, but don't assume they can't.
     # In other words, don't assume file encoding will always be ASCII instead of UTF-8.
     # On Mac I used character viewer to drag accented characters into new file in MacVim
