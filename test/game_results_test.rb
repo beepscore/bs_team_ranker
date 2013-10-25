@@ -74,4 +74,30 @@ END
     assert_equal(expected_result, actual_result)
   end
 
+  def test_configure_games()
+    a_game_results = GameResults.new('./sample-input.txt', 'utf-8')
+    a_game_results.configure_games
+    actual_count = a_game_results.games_array.count
+    expected_count = 5
+    assert_equal(expected_count, actual_count)
+
+    actual_result = a_game_results.games_array
+    expected_result = ["Lions 3, Snakes 3",
+                       "Tarantulas 1, FC Awesome 0",
+                       "Lions 1, FC Awesome 1",
+                       "Tarantulas 3, Snakes 1",
+                       "Lions 4, Grouches 0"]
+    assert_equal(expected_result, actual_result)
+
+    a_game_results = GameResults.new('./sample-input-utf8.txt', 'utf-8')
+    a_game_results.configure_games
+    actual_count = a_game_results.games_array.count
+    expected_count = 6
+    assert_equal(expected_count, actual_count)
+
+    actual_result = a_game_results.games_array
+    assert_equal("Tarantulas 1, FC Awesome 0", a_game_results.games_array[1])
+    assert_equal("áƏĭö 14, ƩƿƔƸȢ 268", a_game_results.games_array[4])
+  end
+
 end

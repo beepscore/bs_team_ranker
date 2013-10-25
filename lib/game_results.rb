@@ -6,6 +6,7 @@ class GameResults
   attr_reader :file_encoding
   attr_reader :file_name
   attr_reader :file_string
+  attr_reader :games_array
 
   def initialize(file_name, external_encoding)
     @file_name = file_name
@@ -39,6 +40,17 @@ class GameResults
 
     end
 
+  end
+
+  def configure_games
+
+    @games_array = []
+    @file_string.each_line do |line|
+        # add game
+        # use chomp to remove line ending (platform independent \n, \r)
+        game = line.chomp
+        @games_array.push(game)
+    end
   end
 
 end
