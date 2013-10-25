@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'test/unit'
+require 'minitest/unit'
 require 'minitest/autorun'
-
 require_relative '../lib/game_results'
 
 class GameResultsTest < MiniTest::Unit::TestCase
