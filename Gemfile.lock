@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    minitest (4.3.2)
     rake (10.1.0)
     test-unit (2.5.5)
 
@@ -8,5 +9,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  minitest
   rake (>= 10.1.0)
   test-unit (>= 2.5.5)
