@@ -9,6 +9,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  minitest
+  minitest (>= 4.3.2)
   rake (>= 10.1.0)
   test-unit (>= 2.5.5)
