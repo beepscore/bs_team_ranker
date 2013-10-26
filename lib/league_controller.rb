@@ -7,7 +7,7 @@ class LeagueController
   attr_reader :file_encoding
   attr_reader :file_name
   attr_reader :file_string
-  attr_reader :games_array
+  attr_reader :games
 
   def initialize(file_name, external_encoding)
     @file_name = file_name
@@ -41,16 +41,16 @@ class LeagueController
 
     end
 
+    @games = []
+
   end
 
-  def configure_games
-
-    @games_array = []
+  def add_games
     @file_string.each_line do |line|
         # add game
         # use chomp to remove line ending (platform independent \n, \r)
         game = Game.new(line.chomp)
-        @games_array.push(game)
+        @games.push(game)
     end
   end
 
