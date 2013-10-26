@@ -37,7 +37,7 @@ class Game
       re = /\d+$/
       match_data = team_string.match re
       unless match_data.nil?
-        score = match_data[0]
+        score = match_data[0].to_i
       end
     end
     score
