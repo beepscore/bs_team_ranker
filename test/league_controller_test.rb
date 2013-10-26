@@ -69,6 +69,11 @@ END
     assert_equal(expected_result, actual_result)
   end
 
+  def test_new_sets_games
+    a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    assert_equal([], a_league_controller.games)
+  end
+
   def test_add_games
     a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
     a_league_controller.add_games(a_league_controller.games, a_league_controller.file_string)
