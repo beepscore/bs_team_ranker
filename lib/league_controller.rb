@@ -8,6 +8,7 @@ class LeagueController
   attr_reader :file_name
   attr_reader :file_string
   attr_reader :games
+  attr_reader :teams
 
   def initialize(file_name, external_encoding)
     @file_name = file_name
@@ -42,6 +43,7 @@ class LeagueController
     end
 
     @games = []
+    @teams = []
 
   end
 
