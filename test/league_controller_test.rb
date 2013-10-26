@@ -72,27 +72,23 @@ END
   def test_configure_games
     a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
     a_league_controller.configure_games
-    actual_count = a_league_controller.games_array.count
-    expected_count = 5
-    assert_equal(expected_count, actual_count)
+    assert_equal(5, a_league_controller.games_array.count)
 
-    actual_result = a_league_controller.games_array
-    expected_result = ["Lions 3, Snakes 3",
-                       "Tarantulas 1, FC Awesome 0",
-                       "Lions 1, FC Awesome 1",
-                       "Tarantulas 3, Snakes 1",
-                       "Lions 4, Grouches 0"]
-    assert_equal(expected_result, actual_result)
+    test_game = a_league_controller.games_array[0]
+    assert_equal('Lions', test_game.team_a)
+    assert_equal(3, test_game.team_a_score)
 
     a_league_controller = LeagueController.new('./sample-input-utf8.txt', 'utf-8')
     a_league_controller.configure_games
-    actual_count = a_league_controller.games_array.count
-    expected_count = 6
-    assert_equal(expected_count, actual_count)
+    assert_equal(6, a_league_controller.games_array.count)
 
-    actual_result = a_league_controller.games_array
-    assert_equal("Tarantulas 1, FC Awesome 0", a_league_controller.games_array[1])
-    assert_equal("áƏĭö 14, ƩƿƔƸȢ 268", a_league_controller.games_array[4])
+    test_game = a_league_controller.games_array[1]
+    assert_equal('Tarantulas', test_game.team_a)
+    assert_equal(1, test_game.team_a_score)
+
+    test_game = a_league_controller.games_array[4]
+    assert_equal('ƩƿƔƸȢ', test_game.team_b)
+    assert_equal(268, test_game.team_b_score)
   end
 
 end

@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require_relative 'game'
 
 class LeagueController
 
@@ -48,7 +49,7 @@ class LeagueController
     @file_string.each_line do |line|
         # add game
         # use chomp to remove line ending (platform independent \n, \r)
-        game = line.chomp
+        game = Game.new(line.chomp)
         @games_array.push(game)
     end
   end
