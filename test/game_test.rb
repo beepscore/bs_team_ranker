@@ -20,6 +20,20 @@ class GameTest < MiniTest::Unit::TestCase
     assert_equal('ƩƿƔƸȢ', a_game.team_b)
   end
 
+  def test_new_sets_scores
+    a_game = Game.new('Tarantulas 3, Snakes 1')
+    assert_equal('3', a_game.team_a_score)
+    assert_equal('1', a_game.team_b_score)
+
+    a_game = Game.new('Tarantulas 1, FC Awesome 0')
+    assert_equal('1', a_game.team_a_score)
+    assert_equal('0', a_game.team_b_score)
+
+    a_game = Game.new('áƏĭö 14, ƩƿƔƸȢ 268')
+    assert_equal('14', a_game.team_a_score)
+    assert_equal('268', a_game.team_b_score)
+  end
+
   def test_name
     a_game = Game.new(nil)
 
