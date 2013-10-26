@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 
-class GameResults
+class LeagueController
 
   attr_reader :file_encoding
   attr_reader :file_name

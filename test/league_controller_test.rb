@@ -2,9 +2,9 @@
 
 require 'minitest/unit'
 require 'minitest/autorun'
-require_relative '../lib/game_results'
+require_relative '../lib/league_controller'
 
-class GameResultsTest < MiniTest::Unit::TestCase
+class LeagueControllerTest < MiniTest::Unit::TestCase
 
   def test_new_sets_file_encoding
     # Terminal file command shows
@@ -19,30 +19,30 @@ class GameResultsTest < MiniTest::Unit::TestCase
     # $ file sample-input-utf8.txt
     # sample-input-utf8.txt: UTF-8 Unicode text
 
-    a_game_results = GameResults.new('./sample-input.txt', 'ascii')
-    actual_result = a_game_results.file_encoding
+    a_league_controller = LeagueController.new('./sample-input.txt', 'ascii')
+    actual_result = a_league_controller.file_encoding
     expected_result = Encoding.find('US-ASCII')
     assert_equal(expected_result, actual_result)
 
-    a_game_results = GameResults.new('./sample-input.txt', 'utf-8')
-    actual_result = a_game_results.file_encoding
+    a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    actual_result = a_league_controller.file_encoding
     expected_result = Encoding.find('UTF-8')
     assert_equal(expected_result, actual_result)
 
     # this throws error
     # Encoding::InvalidByteSequenceError: "\xC3" on US-ASCII
-    # a_game_results = GameResults.new('./sample-input-utf8.txt', 'ascii')
+    # a_league_controller = LeagueController.new('./sample-input-utf8.txt', 'ascii')
 
-    a_game_results = GameResults.new('./sample-input-utf8.txt', 'utf-8')
-    actual_result = a_game_results.file_encoding
+    a_league_controller = LeagueController.new('./sample-input-utf8.txt', 'utf-8')
+    actual_result = a_league_controller.file_encoding
     expected_result = Encoding.find('UTF-8')
     assert_equal(expected_result, actual_result)
   end
 
   def test_new_sets_file_string
 
-    a_game_results = GameResults.new('./sample-input.txt', 'utf-8')
-    actual_result = a_game_results.file_string
+    a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    actual_result = a_league_controller.file_string
     puts ''
     puts 'file_string:' + actual_result
     expected_result = <<END
@@ -54,8 +54,8 @@ Lions 4, Grouches 0
 END
     assert_equal(expected_result, actual_result)
 
-    a_game_results = GameResults.new('./sample-input-utf8.txt', 'utf-8')
-    actual_result = a_game_results.file_string
+    a_league_controller = LeagueController.new('./sample-input-utf8.txt', 'utf-8')
+    actual_result = a_league_controller.file_string
     puts ''
     puts 'file_string:' + actual_result
     expected_result = <<END
@@ -70,13 +70,13 @@ END
   end
 
   def test_configure_games
-    a_game_results = GameResults.new('./sample-input.txt', 'utf-8')
-    a_game_results.configure_games
-    actual_count = a_game_results.games_array.count
+    a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    a_league_controller.configure_games
+    actual_count = a_league_controller.games_array.count
     expected_count = 5
     assert_equal(expected_count, actual_count)
 
-    actual_result = a_game_results.games_array
+    actual_result = a_league_controller.games_array
     expected_result = ["Lions 3, Snakes 3",
                        "Tarantulas 1, FC Awesome 0",
                        "Lions 1, FC Awesome 1",
@@ -84,15 +84,15 @@ END
                        "Lions 4, Grouches 0"]
     assert_equal(expected_result, actual_result)
 
-    a_game_results = GameResults.new('./sample-input-utf8.txt', 'utf-8')
-    a_game_results.configure_games
-    actual_count = a_game_results.games_array.count
+    a_league_controller = LeagueController.new('./sample-input-utf8.txt', 'utf-8')
+    a_league_controller.configure_games
+    actual_count = a_league_controller.games_array.count
     expected_count = 6
     assert_equal(expected_count, actual_count)
 
-    actual_result = a_game_results.games_array
-    assert_equal("Tarantulas 1, FC Awesome 0", a_game_results.games_array[1])
-    assert_equal("áƏĭö 14, ƩƿƔƸȢ 268", a_game_results.games_array[4])
+    actual_result = a_league_controller.games_array
+    assert_equal("Tarantulas 1, FC Awesome 0", a_league_controller.games_array[1])
+    assert_equal("áƏĭö 14, ƩƿƔƸȢ 268", a_league_controller.games_array[4])
   end
 
 end

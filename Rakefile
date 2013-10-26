@@ -7,7 +7,7 @@ require 'rake'
 require 'rake/testtask'
 require_relative 'test/game_test'
 require_relative 'test/team_test'
-require_relative 'test/game_results_test'
+require_relative 'test/league_controller_test'
 
 
 # http://rake.rubyforge.org/
