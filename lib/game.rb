@@ -1,23 +1,24 @@
 #!/usr/bin/env ruby
 
+require_relative 'game_team'
+
 class Game
 
-  # game has 2 teams, so don't bother to make a teams collection
-  attr_reader :team_a_name
-  attr_reader :team_b_name
-  attr_reader :team_a_score
-  attr_reader :team_b_score
+  # Use a collection in order to follow DRY principle
+  # In soccer a game has 2 teams
+  # In some sports such as swimming, an 'game' could be a swim meet and contain more than 2 teams
+  attr_reader :game_teams
 
-  def initialize(game_string)
-    unless game_string.nil?
-      team_a_string = game_string.split(',')[0].strip()
-      team_b_string = game_string.split(',')[1].strip()
-
-      @team_a_name = name(team_a_string)
-      @team_b_name = name(team_b_string)
-
-      @team_a_score = score(team_a_string)
-      @team_b_score = score(team_b_string)
+  def initialize(a_game_string)
+    @game_teams = []
+    unless a_game_string.nil?
+      team_strings = a_game_string.split(',')
+      # strip leading and trailing whitespace. This is platform independent
+      team_strings.map! {|game_string| game_string.strip}
+      team_strings.each do |team_string|
+        game_team = GameTeam.new(team_string)
+        @game_teams.push(game_team)
+      end
     end
   end
 

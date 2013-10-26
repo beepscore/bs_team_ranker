@@ -85,20 +85,20 @@ END
     assert_equal(5, a_league_controller.games.count)
 
     test_game = a_league_controller.games[0]
-    assert_equal('Lions', test_game.team_a_name)
-    assert_equal(3, test_game.team_a_score)
+    assert_equal('Lions', test_game.game_teams[0].name)
+    assert_equal(3, test_game.game_teams[0].score)
 
     a_league_controller = LeagueController.new('./sample-input-utf8.txt', 'utf-8')
     a_league_controller.add_games(a_league_controller.games, a_league_controller.file_string)
     assert_equal(6, a_league_controller.games.count)
 
     test_game = a_league_controller.games[1]
-    assert_equal('Tarantulas', test_game.team_a_name)
-    assert_equal(1, test_game.team_a_score)
+    assert_equal('Tarantulas', test_game.game_teams[0].name)
+    assert_equal(1, test_game.game_teams[0].score)
 
     test_game = a_league_controller.games[4]
-    assert_equal('ƩƿƔƸȢ', test_game.team_b_name)
-    assert_equal(268, test_game.team_b_score)
+    assert_equal('ƩƿƔƸȢ', test_game.game_teams[1].name)
+    assert_equal(268, test_game.game_teams[1].score)
   end
 
   def test_team_name_in_teams

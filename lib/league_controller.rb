@@ -61,13 +61,12 @@ class LeagueController
   end
 
   def update_teams(a_teams, a_game)
-    unless team_name_in_teams?(a_teams, a_game.team_a_name)
-      team = Team.new(a_game.team_a_name)
-      a_teams.push(team)
-    end
-    unless team_name_in_teams?(a_teams, a_game.team_b_name)
-      team = Team.new(a_game.team_b_name)
-      a_teams.push(team)
+    a_game.game_teams.each do |game_team|
+      # if game involves one or more unknown teams, add them to a_teams
+      unless team_name_in_teams?(a_teams, game_team.name)
+        team = Team.new(game_team.name)
+        a_teams.push(team)
+      end
     end
   end
 
