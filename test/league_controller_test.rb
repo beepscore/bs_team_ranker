@@ -71,7 +71,7 @@ END
 
   def test_add_games
     a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
-    a_league_controller.add_games
+    a_league_controller.add_games(a_league_controller.games, a_league_controller.file_string)
     assert_equal(5, a_league_controller.games.count)
 
     test_game = a_league_controller.games[0]
@@ -79,7 +79,7 @@ END
     assert_equal(3, test_game.team_a_score)
 
     a_league_controller = LeagueController.new('./sample-input-utf8.txt', 'utf-8')
-    a_league_controller.add_games
+    a_league_controller.add_games(a_league_controller.games, a_league_controller.file_string)
     assert_equal(6, a_league_controller.games.count)
 
     test_game = a_league_controller.games[1]
