@@ -57,7 +57,7 @@ class LeagueController
   end
 
   def team_name_in_teams? (a_teams, a_team_name)
-    name_in_teams = a_teams.any?{|team| team.name == a_team_name}
+    a_teams.any?{|team| team.name == a_team_name}
   end
 
   def update_teams(a_teams, a_game)
