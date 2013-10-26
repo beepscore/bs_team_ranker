@@ -3,8 +3,8 @@
 class Game
 
   # game has 2 teams, so don't bother to make a teams collection
-  attr_reader :team_a
-  attr_reader :team_b
+  attr_reader :team_a_name
+  attr_reader :team_b_name
   attr_reader :team_a_score
   attr_reader :team_b_score
 
@@ -13,8 +13,8 @@ class Game
       team_a_string = game_string.split(',')[0].strip()
       team_b_string = game_string.split(',')[1].strip()
 
-      @team_a = name(team_a_string)
-      @team_b = name(team_b_string)
+      @team_a_name = name(team_a_string)
+      @team_b_name = name(team_b_string)
 
       @team_a_score = score(team_a_string)
       @team_b_score = score(team_b_string)
