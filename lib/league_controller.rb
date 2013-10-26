@@ -56,4 +56,8 @@ class LeagueController
     end
   end
 
+  def team_name_in_teams? (a_teams, a_team_name)
+    name_in_teams = a_teams.any?{|team| team.name == a_team_name}
+  end
+
 end

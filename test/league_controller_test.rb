@@ -101,4 +101,22 @@ END
     assert_equal(268, test_game.team_b_score)
   end
 
+  def test_team_name_in_teams
+    a_league_controller = LeagueController.new('./sample-input.txt', 'ascii')
+    test_teams = []
+    assert(!a_league_controller.team_name_in_teams?(test_teams, 'Flounders'))
+    assert(!a_league_controller.team_name_in_teams?(test_teams, 'Boom'))
+    assert(!a_league_controller.team_name_in_teams?(test_teams, 'Kicks'))
+
+    test_teams.push(Team.new('Flounders'))
+    assert(a_league_controller.team_name_in_teams?(test_teams, 'Flounders'))
+    assert(!a_league_controller.team_name_in_teams?(test_teams, 'Boom'))
+    assert(!a_league_controller.team_name_in_teams?(test_teams, 'Kicks'))
+
+    test_teams.push(Team.new('Boom'))
+    assert(a_league_controller.team_name_in_teams?(test_teams, 'Flounders'))
+    assert(a_league_controller.team_name_in_teams?(test_teams, 'Boom'))
+    assert(!a_league_controller.team_name_in_teams?(test_teams, 'Kicks'))
+  end
+
 end
