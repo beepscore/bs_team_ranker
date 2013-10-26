@@ -6,6 +6,16 @@ require_relative '../lib/game'
 class GameTest < MiniTest::Unit::TestCase
 
   def test_new_sets_game_teams
+    # test 0 teams
+    a_game = Game.new(nil)
+    assert_equal(0, a_game.game_teams.count)
+
+    # test 1 team
+    # Not useful for soccer, but could be useful for a single player game
+    a_game = Game.new('Tarantulas 3')
+    assert_equal(1, a_game.game_teams.count)
+
+    # test 2 teams
     a_game = Game.new('Tarantulas 3, Snakes 1')
     assert_equal(2, a_game.game_teams.count)
 
@@ -20,23 +30,29 @@ class GameTest < MiniTest::Unit::TestCase
     assert_equal('Tarantulas', a_game.game_teams[0].name)
     assert_equal('Snakes', a_game.game_teams[1].name)
 
-    a_game = Game.new('Tarantulas 1, FC Awesome 0')
+
+    # test more than 2 teams
+    a_game = Game.new('Tarantulas 1, FC Awesome 0, Sammys 5')
     assert_equal('Tarantulas', a_game.game_teams[0].name)
     assert_equal('FC Awesome', a_game.game_teams[1].name)
+    assert_equal('Sammys', a_game.game_teams[2].name)
 
     a_game = Game.new('áƏĭö 14, ƩƿƔƸȢ 268')
     assert_equal('áƏĭö', a_game.game_teams[0].name)
     assert_equal('ƩƿƔƸȢ', a_game.game_teams[1].name)
   end
 
+  # this test scope involves multiple methods, more than a single unit
   def test_new_sets_game_teams_scores
     a_game = Game.new('Tarantulas 3, Snakes 1')
     assert_equal(3, a_game.game_teams[0].score)
     assert_equal(1, a_game.game_teams[1].score)
 
-    a_game = Game.new('Tarantulas 1, FC Awesome 0')
+    # test more than 2 teams
+    a_game = Game.new('Tarantulas 1, FC Awesome 0, Sammys 5')
     assert_equal(1, a_game.game_teams[0].score)
     assert_equal(0, a_game.game_teams[1].score)
+    assert_equal(5, a_game.game_teams[2].score)
 
     a_game = Game.new('áƏĭö 14, ƩƿƔƸȢ 268')
     assert_equal(14, a_game.game_teams[0].score)
