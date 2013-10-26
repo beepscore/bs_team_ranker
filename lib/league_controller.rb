@@ -60,4 +60,15 @@ class LeagueController
     name_in_teams = a_teams.any?{|team| team.name == a_team_name}
   end
 
+  def update_teams(a_teams, a_game)
+    unless team_name_in_teams?(a_teams, a_game.team_a_name)
+      team = Team.new(a_game.team_a_name)
+      a_teams.push(team)
+    end
+    unless team_name_in_teams?(a_teams, a_game.team_b_name)
+      team = Team.new(a_game.team_b_name)
+      a_teams.push(team)
+    end
+  end
+
 end

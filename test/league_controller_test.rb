@@ -119,4 +119,15 @@ END
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Kicks'))
   end
 
+  def test_update_teams
+    a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    a_league_controller.add_games(a_league_controller.games, a_league_controller.file_string)
+    test_game = a_league_controller.games[1]
+    test_teams = []
+    a_league_controller.update_teams(test_teams, test_game)
+    assert(a_league_controller.team_name_in_teams?(test_teams, 'Tarantulas'))
+    assert(a_league_controller.team_name_in_teams?(test_teams, 'FC Awesome'))
+    assert(!a_league_controller.team_name_in_teams?(test_teams, 'Lions'))
+  end
+
 end
