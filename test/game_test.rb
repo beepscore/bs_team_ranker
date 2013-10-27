@@ -61,10 +61,10 @@ class GameTest < MiniTest::Unit::TestCase
 
   def test_scores
     a_game = Game.new('Tarantulas 3, Snakes 1')
-    assert_equal([3, 1], a_game.scores)
+    assert_equal([3, 1], a_game.scores(a_game.game_teams))
 
     a_game = Game.new('Aardvarks 5, Tarantulas 1, FC Awesome 0, Sammys 5')
-    assert_equal([5, 1, 0, 5], a_game.scores)
+    assert_equal([5, 1, 0, 5], a_game.scores(a_game.game_teams))
   end
 
 end
