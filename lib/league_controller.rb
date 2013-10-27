@@ -30,7 +30,7 @@ class LeagueController
 
   # private API. Exposed for use by unit tests
   # add team(s) to @teams if a_game involves one or more unknown teams
-  def add_teams(a_game)
+  def add_new_teams(a_game)
     a_game.game_teams.each do |game_team|
       unless team_name_in_teams?(@teams, game_team.name)
         team = Team.new(game_team.name)
@@ -62,7 +62,7 @@ class LeagueController
 
   def update_teams(a_game)
 
-    add_teams(a_game)
+    add_new_teams(a_game)
 
     teams_in_game = teams_in_game(a_game)
     teams_with_score_max = teams_with_score_max(a_game)
