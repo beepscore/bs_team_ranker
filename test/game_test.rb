@@ -8,20 +8,20 @@ class GameTest < MiniTest::Unit::TestCase
   def test_new_sets_game_teams
     # test 0 teams
     a_game = Game.new(nil)
-    assert_equal(0, a_game.game_teams.count)
+    assert_equal(0, a_game.game_teams.length)
 
     # test 1 team
     # Not useful for soccer, but could be useful for a single player game
     a_game = Game.new('Tarantulas 3')
-    assert_equal(1, a_game.game_teams.count)
+    assert_equal(1, a_game.game_teams.length)
 
     # test 2 teams
     a_game = Game.new('Tarantulas 3, Snakes 1')
-    assert_equal(2, a_game.game_teams.count)
+    assert_equal(2, a_game.game_teams.length)
 
     # test more than 2 teams
     a_game = Game.new('Tarantulas 1, FC Awesome 0, Invaders 3')
-    assert_equal(3, a_game.game_teams.count)
+    assert_equal(3, a_game.game_teams.length)
   end
 
   # this test scope involves multiple methods, more than a single unit
