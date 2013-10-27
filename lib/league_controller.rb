@@ -14,12 +14,12 @@ class LeagueController
 
   end
 
-  def add_games(a_games, a_games_string)
+  def add_games(a_games_string)
     a_games_string.each_line do |line|
       # add game
       # use chomp to remove line ending (platform independent \n, \r)
       game = Game.new(line.chomp)
-      a_games.push(game)
+      @games.push(game)
     end
   end
 
