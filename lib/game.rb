@@ -26,4 +26,7 @@ class Game
     a_game_teams.map{|game_team| game_team.score}
   end
 
+  def score_max(a_game_teams)
+    scores(a_game_teams).max
+  end
 end

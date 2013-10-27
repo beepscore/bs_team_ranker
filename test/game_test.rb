@@ -67,4 +67,9 @@ class GameTest < MiniTest::Unit::TestCase
     assert_equal([5, 1, 0, 5], a_game.scores(a_game.game_teams))
   end
 
+  def test_score_max
+    a_game = Game.new('Tarantulas 3, Snakes 1')
+    assert_equal(3, a_game.score_max(a_game.game_teams))
+  end
+
 end
