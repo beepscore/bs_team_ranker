@@ -35,7 +35,7 @@ class Game
   end
 
   def teams_with_score_max(a_game_teams)
-    teams_with_score(scores(a_game_teams), score_max(a_game_teams))
+    teams_with_score(a_game_teams, score_max(a_game_teams))
   end
 
 end

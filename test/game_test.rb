@@ -106,6 +106,17 @@ class GameTest < MiniTest::Unit::TestCase
     a_game = Game.new(nil)
     actual_teams = a_game.teams_with_score_max(a_game.game_teams)
     assert_equal(0, actual_teams.length)
+
+    a_game = Game.new('Tarantulas 3, Snakes 1')
+    actual_teams = a_game.teams_with_score_max(a_game.game_teams)
+    assert_equal(1, actual_teams.length)
+    assert_equal('Tarantulas', actual_teams[0].name)
+
+    a_game = Game.new('Aardvarks 5, Tarantulas 1, FC Awesome 0, Sammys 5')
+    actual_teams = a_game.teams_with_score_max(a_game.game_teams)
+    assert_equal(2, actual_teams.length)
+    assert_equal('Aardvarks', actual_teams[0].name)
+    assert_equal('Sammys', actual_teams[1].name)
   end
 
 end
