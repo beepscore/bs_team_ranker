@@ -123,12 +123,26 @@ END
     a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
     a_league_controller.teams = []
     a_league_controller.add_games(a_league_controller.games, a_league_controller.file_string)
+
+    test_game = a_league_controller.games[0]
+    assert(!a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Lions'))
+    assert(!a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Snakes'))
+    a_league_controller.update_teams(test_game)
+    assert(a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Lions'))
+    assert(a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Snakes'))
+    lions = a_league_controller.teams.find{|team| 'Lions' == team.name}
+    assert_equal(0, lions.won)
+    assert_equal(1, lions.tied)
+    assert_equal(0, lions.lost)
+    assert_equal(1, lions.points)
+    snakes = a_league_controller.teams.find{|team| 'Snakes' == team.name}
+    assert_equal(0, snakes.won)
+    assert_equal(1, snakes.tied)
+    assert_equal(0, snakes.lost)
+    assert_equal(1, snakes.points)
+
     test_game = a_league_controller.games[1]
     a_league_controller.update_teams(test_game)
-    assert(a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Tarantulas'))
-    assert(a_league_controller.team_name_in_teams?(a_league_controller.teams, 'FC Awesome'))
-    assert(!a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Lions'))
-
     tarantulas = a_league_controller.teams.find{|team| 'Tarantulas' == team.name}
     assert_equal(1, tarantulas.won)
     assert_equal(0, tarantulas.tied)
@@ -140,20 +154,28 @@ END
     assert_equal(1, fc_awesome.lost)
     assert_equal(0, fc_awesome.points)
 
+    test_game = a_league_controller.games[2]
+    a_league_controller.update_teams(test_game)
+    assert_equal(0, lions.won)
+    assert_equal(2, lions.tied)
+    assert_equal(0, lions.lost)
+    assert_equal(2, lions.points)
+    assert_equal(0, fc_awesome.won)
+    assert_equal(1, fc_awesome.tied)
+    assert_equal(1, fc_awesome.lost)
+    assert_equal(1, fc_awesome.points)
+
     test_game = a_league_controller.games[3]
     a_league_controller.update_teams(test_game)
     assert_equal(2, tarantulas.won)
     assert_equal(0, tarantulas.tied)
     assert_equal(0, tarantulas.lost)
     assert_equal(6, tarantulas.points)
+    assert_equal(0, snakes.won)
+    assert_equal(1, snakes.tied)
+    assert_equal(1, snakes.lost)
+    assert_equal(1, snakes.points)
 
-    test_game = a_league_controller.games[2]
-    a_league_controller.update_teams(test_game)
-    lions = a_league_controller.teams.find{|team| 'Lions' == team.name}
-    assert_equal(0, lions.won)
-    assert_equal(1, lions.tied)
-    assert_equal(0, lions.lost)
-    assert_equal(1, lions.points)
   end
 
 end
