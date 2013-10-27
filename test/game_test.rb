@@ -79,16 +79,27 @@ class GameTest < MiniTest::Unit::TestCase
   end
 
   def test_teams_with_score
-    a_game = Game.new('Aardvarks 5, Tarantulas 1, FC Awesome 0, Sammys 5')
-    actual_teams = a_game.teams_with_score(a_game.game_teams, 5)
     # Don't create an array of expected teams and assert_equal arrays
     # array equality requires overriding == for elements and appears finicky
     # Instead check attributes individually
     # Reference
     # http://stackoverflow.com/questions/5265621/ruby-assert-equal-of-two-arrays-of-objects
+    a_game = Game.new(nil)
+    actual_teams = a_game.teams_with_score(a_game.game_teams, 3)
+    assert_equal(0, actual_teams.length)
+
+    a_game = Game.new('Aardvarks 5, Tarantulas 1, FC Awesome 0, Sammys 5')
+    actual_teams = a_game.teams_with_score(a_game.game_teams, 3)
+    assert_equal(0, actual_teams.length)
+
+    actual_teams = a_game.teams_with_score(a_game.game_teams, 5)
     assert_equal(2, actual_teams.length)
     assert_equal('Aardvarks', actual_teams[0].name)
     assert_equal('Sammys', actual_teams[1].name)
+
+    a_game = Game.new('Tarantulas 3, Snakes 1')
+    actual_teams = a_game.teams_with_score(a_game.game_teams, 1)
+    assert_equal(1, actual_teams.length)
   end
 
 end
