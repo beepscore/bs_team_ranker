@@ -22,26 +22,4 @@ class Game
     end
   end
 
-  def name(team_string)
-    name = nil
-    unless team_string.nil?
-      # delete score. match one or more whitespace followed by one or more digits followed by end of line
-      name = team_string.gsub(/\s+\d+$/, '')
-    end
-    name
-  end
-
-  def score(team_string)
-    score = nil
-    unless team_string.nil?
-      # match one or more digits followed by end of line
-      re = /\d+$/
-      match_data = team_string.match re
-      unless match_data.nil?
-        score = match_data[0].to_i
-      end
-    end
-    score
-  end
-
 end
