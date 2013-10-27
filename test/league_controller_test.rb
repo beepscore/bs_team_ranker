@@ -29,26 +29,26 @@ END
   end
 
   def test_new_sets_games
-    a_league_controller = LeagueController.new(@games_string_utf8)
+    a_league_controller = LeagueController.new()
     assert_equal([], a_league_controller.games)
   end
 
   def test_new_sets_teams
-    a_league_controller = LeagueController.new(@games_string_utf8)
+    a_league_controller = LeagueController.new()
     assert_equal([], a_league_controller.teams)
   end
 
   def test_add_games
-    a_league_controller = LeagueController.new(@games_string_ascii)
-    a_league_controller.add_games(a_league_controller.games, a_league_controller.games_string)
+    a_league_controller = LeagueController.new()
+    a_league_controller.add_games(a_league_controller.games, @games_string_ascii)
     assert_equal(5, a_league_controller.games.length)
 
     test_game = a_league_controller.games[0]
     assert_equal('Lions', test_game.game_teams[0].name)
     assert_equal(3, test_game.game_teams[0].score)
 
-    a_league_controller = LeagueController.new(@games_string_utf8)
-    a_league_controller.add_games(a_league_controller.games, a_league_controller.games_string)
+    a_league_controller = LeagueController.new()
+    a_league_controller.add_games(a_league_controller.games, @games_string_utf8)
     assert_equal(6, a_league_controller.games.length)
 
     test_game = a_league_controller.games[1]
@@ -60,8 +60,18 @@ END
     assert_equal(268, test_game.game_teams[1].score)
   end
 
+  def test_add_games_multiple_times
+    a_league_controller = LeagueController.new()
+    a_league_controller.add_games(a_league_controller.games, @games_string_ascii)
+    assert_equal(5, a_league_controller.games.length)
+    a_league_controller.add_games(a_league_controller.games, @games_string_utf8)
+    assert_equal(11, a_league_controller.games.length)
+    a_league_controller.add_games(a_league_controller.games, @games_string_ascii)
+    assert_equal(16, a_league_controller.games.length)
+  end
+
   def test_team_name_in_teams
-    a_league_controller = LeagueController.new(@games_string_ascii)
+    a_league_controller = LeagueController.new()
     test_teams = []
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Flounders'))
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Boom'))
@@ -79,9 +89,8 @@ END
   end
 
   def test_update_teams
-    a_league_controller = LeagueController.new(@games_string_utf8)
-    a_league_controller.teams = []
-    a_league_controller.add_games(a_league_controller.games, a_league_controller.games_string)
+    a_league_controller = LeagueController.new()
+    a_league_controller.add_games(a_league_controller.games, @games_string_utf8)
 
     test_game = a_league_controller.games[0]
     assert(!a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Lions'))

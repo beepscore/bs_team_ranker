@@ -4,13 +4,11 @@ require_relative 'game'
 
 class LeagueController
 
-  attr_reader :games_string
   attr_reader :games
   attr_accessor :teams
 
-  def initialize(a_games_string)
+  def initialize()
 
-    @games_string = a_games_string
     @games = []
     @teams = []
 
