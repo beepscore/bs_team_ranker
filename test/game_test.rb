@@ -68,8 +68,14 @@ class GameTest < MiniTest::Unit::TestCase
   end
 
   def test_score_max
+    a_game = Game.new(nil)
+    assert_equal(nil, a_game.score_max(a_game.game_teams))
+
     a_game = Game.new('Tarantulas 3, Snakes 1')
     assert_equal(3, a_game.score_max(a_game.game_teams))
+
+    a_game = Game.new('Aardvarks 5, Tarantulas 1, FC Awesome 0, Sammys 5')
+    assert_equal(5, a_game.score_max(a_game.game_teams))
   end
 
 end
