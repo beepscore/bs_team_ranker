@@ -22,4 +22,8 @@ class Game
     end
   end
 
+  def scores
+    @game_teams.map{|game_team| game_team.score}
+  end
+
 end
