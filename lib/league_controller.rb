@@ -14,13 +14,19 @@ class LeagueController
 
   end
 
+  # updates model objects @games and @teams
+  # adds new teams and updates team attributes won, tied, lost.
   def add_games(a_games_string)
+
     a_games_string.each_line do |line|
       # add game
       # use chomp to remove line ending (platform independent \n, \r)
       game = Game.new(line.chomp)
       @games.push(game)
+
+      update_teams(game)
     end
+
   end
 
   # private API. Exposed for use by unit tests
@@ -29,7 +35,7 @@ class LeagueController
   end
 
   # private API. Exposed for use by unit tests
-  # add team(s) to @teams if a_game involves one or more unknown teams
+  # adds team(s) to @teams if a_game involves one or more unknown teams
   def add_new_teams(a_game)
     a_game.game_teams.each do |game_team|
       unless team_name_in_teams?(@teams, game_team.name)
@@ -39,7 +45,8 @@ class LeagueController
     end
   end
 
-  # team instances matching a_game game_team instances
+  # private API. Exposed for use by unit tests
+  # returns team instances matching a_game game_team instances
   def teams_in_game(a_game)
     teams_in_game = []
     a_game.game_teams.each do |game_team|
@@ -49,6 +56,7 @@ class LeagueController
     teams_in_game
   end
 
+  # private API. Exposed for use by unit tests
   def teams_with_score_max(a_game)
     teams_with_score_max = []
     game_teams_with_score_max = a_game.teams_with_score_max(a_game.game_teams)
@@ -60,6 +68,9 @@ class LeagueController
     teams_with_score_max
   end
 
+  # private API. Exposed for use by unit tests
+  # updates won, tied, lost for each team in this game
+  # adds new teams
   def update_teams(a_game)
 
     add_new_teams(a_game)
@@ -69,7 +80,6 @@ class LeagueController
 
     teams_in_game.each do |team_in_game|
 
-      # update won, tied, lost for each team in this game
       if !teams_with_score_max.include?(team_in_game)
         # team isn't in group with high score
         team_in_game.lost += 1
