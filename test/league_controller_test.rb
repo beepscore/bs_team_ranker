@@ -6,18 +6,40 @@ require_relative '../lib/league_controller'
 
 class LeagueControllerTest < MiniTest::Unit::TestCase
 
+  attr_reader :games_string_ascii
+  attr_reader :games_string_utf8
+
+  def setup
+    @games_string_ascii = <<END
+Lions 3, Snakes 3
+Tarantulas 1, FC Awesome 0
+Lions 1, FC Awesome 1
+Tarantulas 3, Snakes 1
+Lions 4, Grouches 0
+END
+
+    @games_string_utf8 = <<END
+Lions 3, Snakes 3
+Tarantulas 1, FC Awesome 0
+Lions 1, FC Awesome 1
+Tarantulas 3, Snakes 1
+áƏĭö 14, ƩƿƔƸȢ 268
+Lions 4, Grouches 0
+END
+  end
+
   def test_new_sets_games
-    a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    a_league_controller = LeagueController.new(@games_string_utf8)
     assert_equal([], a_league_controller.games)
   end
 
   def test_new_sets_teams
-    a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    a_league_controller = LeagueController.new(@games_string_utf8)
     assert_equal([], a_league_controller.teams)
   end
 
   def test_add_games
-    a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    a_league_controller = LeagueController.new(@games_string_ascii)
     a_league_controller.add_games(a_league_controller.games, a_league_controller.games_string)
     assert_equal(5, a_league_controller.games.length)
 
@@ -25,7 +47,7 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
     assert_equal('Lions', test_game.game_teams[0].name)
     assert_equal(3, test_game.game_teams[0].score)
 
-    a_league_controller = LeagueController.new('./sample-input-utf8.txt', 'utf-8')
+    a_league_controller = LeagueController.new(@games_string_utf8)
     a_league_controller.add_games(a_league_controller.games, a_league_controller.games_string)
     assert_equal(6, a_league_controller.games.length)
 
@@ -39,7 +61,7 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
   end
 
   def test_team_name_in_teams
-    a_league_controller = LeagueController.new('./sample-input.txt', 'ascii')
+    a_league_controller = LeagueController.new(@games_string_ascii)
     test_teams = []
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Flounders'))
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Boom'))
@@ -57,7 +79,7 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
   end
 
   def test_update_teams
-    a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    a_league_controller = LeagueController.new(@games_string_utf8)
     a_league_controller.teams = []
     a_league_controller.add_games(a_league_controller.games, a_league_controller.games_string)
 

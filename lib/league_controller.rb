@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative 'bs_file_accessor'
 require_relative 'game'
 
 class LeagueController
@@ -9,11 +8,9 @@ class LeagueController
   attr_reader :games
   attr_accessor :teams
 
-  def initialize(file_name, external_encoding)
+  def initialize(a_games_string)
 
-    file_accessor = BSFileAccessor.new(file_name, external_encoding)
-    @games_string = file_accessor.file_string
-
+    @games_string = a_games_string
     @games = []
     @teams = []
 
