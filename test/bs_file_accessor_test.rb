@@ -44,7 +44,7 @@ class BSFileAccessorTest < MiniTest::Unit::TestCase
     file_accessor = BSFileAccessor.new('./sample-input.txt', 'utf-8')
     actual_result = file_accessor.file_string
     puts ''
-    puts 'file_string:' + actual_result
+    puts "file_string: #{actual_result}"
     expected_result = <<END
 Lions 3, Snakes 3
 Tarantulas 1, FC Awesome 0
@@ -57,7 +57,7 @@ END
     file_accessor = BSFileAccessor.new('./sample-input-utf8.txt', 'utf-8')
     actual_result = file_accessor.file_string
     puts ''
-    puts 'file_string:' + actual_result
+    puts "file_string: #{actual_result}"
     expected_result = <<END
 Lions 3, Snakes 3
 Tarantulas 1, FC Awesome 0
