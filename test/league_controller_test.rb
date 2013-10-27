@@ -121,13 +121,40 @@ END
 
   def test_update_teams
     a_league_controller = LeagueController.new('./sample-input.txt', 'utf-8')
+    a_league_controller.teams = []
     a_league_controller.add_games(a_league_controller.games, a_league_controller.file_string)
     test_game = a_league_controller.games[1]
-    test_teams = []
-    a_league_controller.update_teams(test_teams, test_game)
-    assert(a_league_controller.team_name_in_teams?(test_teams, 'Tarantulas'))
-    assert(a_league_controller.team_name_in_teams?(test_teams, 'FC Awesome'))
-    assert(!a_league_controller.team_name_in_teams?(test_teams, 'Lions'))
+    a_league_controller.update_teams(test_game)
+    assert(a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Tarantulas'))
+    assert(a_league_controller.team_name_in_teams?(a_league_controller.teams, 'FC Awesome'))
+    assert(!a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Lions'))
+
+    tarantulas = a_league_controller.teams.find{|team| 'Tarantulas' == team.name}
+    assert_equal(1, tarantulas.won)
+    assert_equal(0, tarantulas.tied)
+    assert_equal(0, tarantulas.lost)
+    assert_equal(3, tarantulas.points)
+    fc_awesome = a_league_controller.teams.find{|team| 'FC Awesome' == team.name}
+    assert_equal(0, fc_awesome.won)
+    assert_equal(0, fc_awesome.tied)
+    assert_equal(1, fc_awesome.lost)
+    assert_equal(0, fc_awesome.points)
+
+    test_game = a_league_controller.games[3]
+    a_league_controller.update_teams(test_game)
+    assert_equal(2, tarantulas.won)
+    assert_equal(0, tarantulas.tied)
+    assert_equal(0, tarantulas.lost)
+    assert_equal(6, tarantulas.points)
+
+    test_game = a_league_controller.games[2]
+    a_league_controller.update_teams(test_game)
+    lions = a_league_controller.teams.find{|team| 'Lions' == team.name}
+    assert_equal(0, lions.won)
+    assert_equal(0, lions.lost)
+    # FIXME assertions fail. is app double counting?
+    #assert_equal(1, lions.tied)
+    #assert_equal(1, lions.points)
   end
 
 end

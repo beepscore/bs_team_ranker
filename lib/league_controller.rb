@@ -8,7 +8,7 @@ class LeagueController
   attr_reader :file_name
   attr_reader :file_string
   attr_reader :games
-  attr_reader :teams
+  attr_accessor :teams
 
   def initialize(file_name, external_encoding)
     @file_name = file_name
@@ -60,12 +60,67 @@ class LeagueController
     a_teams.any?{|team| team.name == a_team_name}
   end
 
-  def update_teams(a_teams, a_game)
+  # add team(s) to @teams if a_game involves one or more unknown teams
+  def add_teams(a_game)
     a_game.game_teams.each do |game_team|
-      # if game involves one or more unknown teams, add them to a_teams
-      unless team_name_in_teams?(a_teams, game_team.name)
+      unless team_name_in_teams?(@teams, game_team.name)
         team = Team.new(game_team.name)
-        a_teams.push(team)
+        @teams.push(team)
+      end
+    end
+  end
+
+  # team instances matching a_game game_team instances
+  def teams_in_game(a_game)
+    teams_in_game = []
+    a_game.game_teams.each do |game_team|
+      team_in_game = @teams.find_all{|team| game_team.name == team.name}.first
+      teams_in_game.push(team_in_game)
+    end
+    teams_in_game
+  end
+
+  def teams_with_score_max(a_game)
+    teams_with_score_max = []
+    game_teams_with_score_max = a_game.teams_with_score_max(a_game.game_teams)
+    game_teams_with_score_max.each do |game_team_with_score_max|
+      # find team instance matching game_team instance
+      team_with_score_max = @teams.find{|team| team.name == game_team_with_score_max.name}
+      teams_with_score_max.push(team_with_score_max)
+    end
+    teams_with_score_max
+  end
+
+  def update_teams(a_game)
+
+    add_teams(a_game)
+
+    teams_in_game = teams_in_game(a_game)
+    teams_with_score_max = teams_with_score_max(a_game)
+
+    teams_in_game.each do |team_in_game|
+
+      # update won, tied, lost for each team in this game
+      if !teams_with_score_max.include?(team_in_game)
+        # team isn't in group with high score
+        team_in_game.lost += 1
+
+      else
+        # team is in group with high score.
+        # team won or tied
+        if (1 == teams_with_score_max.length)
+          # only one team has high score
+          # team won
+          teams_with_score_max.each do |team_with_score_max|
+            team_with_score_max.won += 1
+          end
+        elsif (2 <= teams_with_score_max.length)
+          # more than one team has high score
+          # team tied
+          teams_with_score_max.each do |team_with_score_max|
+            team_with_score_max.tied += 1
+          end
+        end
       end
     end
   end
