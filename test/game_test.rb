@@ -102,4 +102,10 @@ class GameTest < MiniTest::Unit::TestCase
     assert_equal(1, actual_teams.length)
   end
 
+  def test_teams_with_score_max
+    a_game = Game.new(nil)
+    actual_teams = a_game.teams_with_score_max(a_game.game_teams)
+    assert_equal(0, actual_teams.length)
+  end
+
 end
