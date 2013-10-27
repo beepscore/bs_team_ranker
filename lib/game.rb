@@ -29,4 +29,9 @@ class Game
   def score_max(a_game_teams)
     scores(a_game_teams).max
   end
+
+  def teams_with_score(a_game_teams, a_score)
+    a_game_teams.find_all{|game_team| a_score == game_team.score}
+  end
+
 end
