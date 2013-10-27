@@ -13,6 +13,7 @@ class GameTeam
     end
   end
 
+  # private API. Exposed for use by unit tests
   def name_from_team_string(a_team_string)
     name = nil
     unless a_team_string.nil?
@@ -22,6 +23,7 @@ class GameTeam
     name
   end
 
+  # private API. Exposed for use by unit tests
   def score_from_team_string(a_team_string)
     score = nil
     unless a_team_string.nil?

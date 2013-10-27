@@ -56,10 +56,12 @@ class LeagueController
     end
   end
 
+  # private API. Exposed for use by unit tests
   def team_name_in_teams? (a_teams, a_team_name)
     a_teams.any?{|team| team.name == a_team_name}
   end
 
+  # private API. Exposed for use by unit tests
   # add team(s) to @teams if a_game involves one or more unknown teams
   def add_teams(a_game)
     a_game.game_teams.each do |game_team|
