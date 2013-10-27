@@ -151,10 +151,9 @@ END
     a_league_controller.update_teams(test_game)
     lions = a_league_controller.teams.find{|team| 'Lions' == team.name}
     assert_equal(0, lions.won)
+    assert_equal(1, lions.tied)
     assert_equal(0, lions.lost)
-    # FIXME assertions fail. is app double counting?
-    #assert_equal(1, lions.tied)
-    #assert_equal(1, lions.points)
+    assert_equal(1, lions.points)
   end
 
 end

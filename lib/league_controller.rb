@@ -111,15 +111,11 @@ class LeagueController
         if (1 == teams_with_score_max.length)
           # only one team has high score
           # team won
-          teams_with_score_max.each do |team_with_score_max|
-            team_with_score_max.won += 1
-          end
+          team_in_game.won += 1
         elsif (2 <= teams_with_score_max.length)
           # more than one team has high score
           # team tied
-          teams_with_score_max.each do |team_with_score_max|
-            team_with_score_max.tied += 1
-          end
+          team_in_game.tied += 1
         end
       end
     end
