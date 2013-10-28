@@ -226,4 +226,30 @@ END
     assert_equal(3, league_controller.teams_in_game(league_controller.games[4]).size)
   end
 
+  def test_ranked_teams
+    league_controller = LeagueController.new()
+    league_controller.add_games(@games_string_ascii)
+
+    actual_ranked_teams = league_controller.ranked_teams(league_controller.teams)
+    assert_equal('Tarantulas', actual_ranked_teams[0].name)
+    assert_equal(["Tarantulas", "Lions", "FC Awesome", "Snakes", "Grouches"],
+                 actual_ranked_teams.map{ |team| team.name })
+  end
+
+  def test_write_ranked_teams
+    league_controller = LeagueController.new()
+    league_controller.add_games(@games_string_ascii)
+    actual_result = league_controller.write_ranked_teams(league_controller.ranked_teams(league_controller.teams))
+
+    expected_result = <<END
+1. Tarantulas, 6 pts
+2. Lions, 5 pts
+3. FC Awesome, 1 pt
+3. Snakes, 1 pt
+5. Grouches, 0 pts
+END
+
+    assert_equal(expected_result, actual_result)
+  end
+
 end

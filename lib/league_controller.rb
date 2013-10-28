@@ -106,4 +106,49 @@ class LeagueController
     end
   end
 
+  # return ranked teams
+  # sorted by points in decreasing order
+  # for ties, secondary sort by name
+  def ranked_teams(a_teams)
+    ranked = []
+    ranked = a_teams.values.to_a
+
+    # http://stackoverflow.com/questions/15993693/ruby-sorting-hash-by-key-and-tie-breaking-on-value
+    # http://www.rubyinside.com/how-to/ruby-sort-hash
+    # returns array
+    ranked.sort_by!{ |team| [-team.points, team.name] }
+  end
+
+  # write ranked teams to a file
+  def write_ranked_teams(a_ranked_teams)
+
+    ranked_string = ''
+    rank = 1
+    previous_team_points = a_ranked_teams[0].points
+    a_ranked_teams.each do |team|
+      if team.points < previous_team_points
+        # This team isn't tied. Advance rank.
+        # After ties, increment by more than 1 e.g. 1, 2, 3, 3, 5 not 1, 2, 3, 3, 4
+        # add 1 because array index starts at 0, rank starts at 1.
+        rank = a_ranked_teams.index(team) + 1
+      end
+
+      points_abbreviation = 'pts'
+      if  1 == team.points
+        points_abbreviation = 'pt'
+      end
+
+      # Assume we want to use newline \n at end of each line as specified in expected-output.txt
+      # Alternatively could use File write line to get system dependent line ending.
+      ranked_string.concat("#{rank}. #{team.name}, #{team.points} #{points_abbreviation}\n")
+
+      previous_team_points = team.points
+    end
+
+    puts
+    puts ranked_string
+    # TODO Write to file
+    ranked_string
+  end
+
 end
