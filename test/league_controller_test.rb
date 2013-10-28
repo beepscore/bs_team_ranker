@@ -73,35 +73,6 @@ END
     assert_equal(16, league_controller.games.length)
   end
 
-  def test_team_name_in_teams
-    league_controller = LeagueController.new()
-    test_teams = {}
-    assert(!league_controller.team_name_in_teams?(test_teams, 'Flounders'))
-    assert(!league_controller.team_name_in_teams?(test_teams, 'Boom'))
-    assert(!league_controller.team_name_in_teams?(test_teams, 'Kicks'))
-
-    test_teams['Flounders'.to_sym] = Team.new('Flounders')
-    assert(league_controller.team_name_in_teams?(test_teams, 'Flounders'))
-    assert(!league_controller.team_name_in_teams?(test_teams, 'Boom'))
-    assert(!league_controller.team_name_in_teams?(test_teams, 'Kicks'))
-
-    test_teams['Boom'.to_sym] = Team.new('Boom')
-    assert(league_controller.team_name_in_teams?(test_teams, 'Flounders'))
-    assert(league_controller.team_name_in_teams?(test_teams, 'Boom'))
-    assert(!league_controller.team_name_in_teams?(test_teams, 'Kicks'))
-  end
-
-  def test_teams_in_game
-    league_controller = LeagueController.new()
-    league_controller.add_games(@games_string_ascii)
-    assert_equal(2, league_controller.teams_in_game(league_controller.games[0]).size)
-
-    # expect allow more than 2 teams in a game
-    league_controller = LeagueController.new()
-    league_controller.add_games(@games_string_utf8)
-    assert_equal(3, league_controller.teams_in_game(league_controller.games[4]).size)
-  end
-
   def test_add_games_updates_teams
     league_controller = LeagueController.new()
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Lions'))
@@ -150,6 +121,35 @@ END
     assert_equal(0, grouches.tied)
     assert_equal(1, grouches.lost)
     assert_equal(0, grouches.points)
+  end
+
+  def test_team_name_in_teams
+    league_controller = LeagueController.new()
+    test_teams = {}
+    assert(!league_controller.team_name_in_teams?(test_teams, 'Flounders'))
+    assert(!league_controller.team_name_in_teams?(test_teams, 'Boom'))
+    assert(!league_controller.team_name_in_teams?(test_teams, 'Kicks'))
+
+    test_teams['Flounders'.to_sym] = Team.new('Flounders')
+    assert(league_controller.team_name_in_teams?(test_teams, 'Flounders'))
+    assert(!league_controller.team_name_in_teams?(test_teams, 'Boom'))
+    assert(!league_controller.team_name_in_teams?(test_teams, 'Kicks'))
+
+    test_teams['Boom'.to_sym] = Team.new('Boom')
+    assert(league_controller.team_name_in_teams?(test_teams, 'Flounders'))
+    assert(league_controller.team_name_in_teams?(test_teams, 'Boom'))
+    assert(!league_controller.team_name_in_teams?(test_teams, 'Kicks'))
+  end
+
+  def test_teams_in_game
+    league_controller = LeagueController.new()
+    league_controller.add_games(@games_string_ascii)
+    assert_equal(2, league_controller.teams_in_game(league_controller.games[0]).size)
+
+    # expect allow more than 2 teams in a game
+    league_controller = LeagueController.new()
+    league_controller.add_games(@games_string_utf8)
+    assert_equal(3, league_controller.teams_in_game(league_controller.games[4]).size)
   end
 
 end
