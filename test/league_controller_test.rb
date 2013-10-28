@@ -35,7 +35,7 @@ END
 
   def test_new_sets_teams
     a_league_controller = LeagueController.new()
-    assert_equal([], a_league_controller.teams)
+    assert_equal({}, a_league_controller.teams)
   end
 
   def test_add_games
@@ -73,17 +73,17 @@ END
 
   def test_team_name_in_teams
     a_league_controller = LeagueController.new()
-    test_teams = []
+    test_teams = {}
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Flounders'))
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Boom'))
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Kicks'))
 
-    test_teams.push(Team.new('Flounders'))
+    test_teams['Flounders'.to_sym] = Team.new('Flounders')
     assert(a_league_controller.team_name_in_teams?(test_teams, 'Flounders'))
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Boom'))
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Kicks'))
 
-    test_teams.push(Team.new('Boom'))
+    test_teams['Boom'.to_sym] = Team.new('Boom')
     assert(a_league_controller.team_name_in_teams?(test_teams, 'Flounders'))
     assert(a_league_controller.team_name_in_teams?(test_teams, 'Boom'))
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Kicks'))
@@ -107,11 +107,11 @@ END
     assert(a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Grouches'))
     assert(!a_league_controller.team_name_in_teams?(a_league_controller.teams, 'Elephants'))
 
-    lions = a_league_controller.teams.find{|team| 'Lions' == team.name}
-    snakes = a_league_controller.teams.find{|team| 'Snakes' == team.name}
-    tarantulas = a_league_controller.teams.find{|team| 'Tarantulas' == team.name}
-    fc_awesome = a_league_controller.teams.find{|team| 'FC Awesome' == team.name}
-    grouches = a_league_controller.teams.find{|team| 'Grouches' == team.name}
+    lions = a_league_controller.teams['Lions'.to_sym]
+    snakes = a_league_controller.teams['Snakes'.to_sym]
+    tarantulas = a_league_controller.teams['Tarantulas'.to_sym]
+    fc_awesome = a_league_controller.teams['FC Awesome'.to_sym]
+    grouches = a_league_controller.teams['Grouches'.to_sym]
 
     assert_equal(1, lions.won)
     assert_equal(2, lions.tied)

@@ -10,7 +10,9 @@ class LeagueController
   def initialize()
 
     @games = []
-    @teams = []
+    # Use hash for faster lookup than array.
+    # Could use Set to guarantee elements are unique, but lookup may not be as convenient.
+    @teams = {}
 
   end
 
@@ -31,7 +33,7 @@ class LeagueController
 
   # private API. Exposed for use by unit tests
   def team_name_in_teams? (a_teams, a_team_name)
-    a_teams.any?{|team| team.name == a_team_name}
+    a_teams.has_key?(a_team_name.to_sym)
   end
 
   # private API. Exposed for use by unit tests
@@ -40,7 +42,7 @@ class LeagueController
     a_game.game_teams.each do |game_team|
       unless team_name_in_teams?(@teams, game_team.name)
         team = Team.new(game_team.name)
-        @teams.push(team)
+        @teams[game_team.name.to_sym] = team
       end
     end
   end
@@ -50,7 +52,7 @@ class LeagueController
   def teams_in_game(a_game)
     teams_in_game = []
     a_game.game_teams.each do |game_team|
-      team_in_game = @teams.find_all{|team| game_team.name == team.name}.first
+      team_in_game = @teams[game_team.name.to_sym]
       teams_in_game.push(team_in_game)
     end
     teams_in_game
@@ -62,7 +64,7 @@ class LeagueController
     game_teams_with_score_max = a_game.teams_with_score_max(a_game.game_teams)
     game_teams_with_score_max.each do |game_team_with_score_max|
       # find team instance matching game_team instance
-      team_with_score_max = @teams.find{|team| team.name == game_team_with_score_max.name}
+      team_with_score_max = @teams[game_team_with_score_max.name.to_sym]
       teams_with_score_max.push(team_with_score_max)
     end
     teams_with_score_max
