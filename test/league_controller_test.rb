@@ -123,6 +123,80 @@ END
     assert_equal(0, grouches.points)
   end
 
+  def test_add_games_team_names_utf8
+    league_controller = LeagueController.new()
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Lions'))
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Snakes'))
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Tarantulas'))
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'FC Awesome'))
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Grouches'))
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'áƏĭö'))
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'ƩƿƔƸȢ'))
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Furry Bears'))
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Elephants'))
+
+    league_controller.add_games(@games_string_utf8)
+
+    assert(league_controller.team_name_in_teams?(league_controller.teams, 'Lions'))
+    assert(league_controller.team_name_in_teams?(league_controller.teams, 'Snakes'))
+    assert(league_controller.team_name_in_teams?(league_controller.teams, 'Tarantulas'))
+    assert(league_controller.team_name_in_teams?(league_controller.teams, 'FC Awesome'))
+    assert(league_controller.team_name_in_teams?(league_controller.teams, 'Grouches'))
+    assert(league_controller.team_name_in_teams?(league_controller.teams, 'áƏĭö'))
+    assert(league_controller.team_name_in_teams?(league_controller.teams, 'ƩƿƔƸȢ'))
+    assert(league_controller.team_name_in_teams?(league_controller.teams, 'Furry Bears'))
+    assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Elephants'))
+
+    lions = league_controller.teams['Lions'.to_sym]
+    snakes = league_controller.teams['Snakes'.to_sym]
+    tarantulas = league_controller.teams['Tarantulas'.to_sym]
+    fc_awesome = league_controller.teams['FC Awesome'.to_sym]
+    grouches = league_controller.teams['Grouches'.to_sym]
+    áƏĭö = league_controller.teams['áƏĭö'.to_sym]
+    ƩƿƔƸȢ = league_controller.teams['ƩƿƔƸȢ'.to_sym]
+    furry_bears = league_controller.teams['Furry Bears'.to_sym]
+
+    assert_equal(1, lions.won)
+    assert_equal(2, lions.tied)
+    assert_equal(0, lions.lost)
+    assert_equal(5, lions.points)
+
+    assert_equal(0, snakes.won)
+    assert_equal(1, snakes.tied)
+    assert_equal(1, snakes.lost)
+    assert_equal(1, snakes.points)
+
+    assert_equal(2, tarantulas.won)
+    assert_equal(0, tarantulas.tied)
+    assert_equal(0, tarantulas.lost)
+    assert_equal(6, tarantulas.points)
+
+    assert_equal(0, fc_awesome.won)
+    assert_equal(1, fc_awesome.tied)
+    assert_equal(1, fc_awesome.lost)
+    assert_equal(1, fc_awesome.points)
+
+    assert_equal(0, grouches.won)
+    assert_equal(0, grouches.tied)
+    assert_equal(1, grouches.lost)
+    assert_equal(0, grouches.points)
+
+    assert_equal(0, áƏĭö.won)
+    assert_equal(0, áƏĭö.tied)
+    assert_equal(1, áƏĭö.lost)
+    assert_equal(0, áƏĭö.points)
+
+    assert_equal(1, ƩƿƔƸȢ.won)
+    assert_equal(0, ƩƿƔƸȢ.tied)
+    assert_equal(0, ƩƿƔƸȢ.lost)
+    assert_equal(3, ƩƿƔƸȢ.points)
+
+    assert_equal(0, furry_bears.won)
+    assert_equal(0, furry_bears.tied)
+    assert_equal(1, furry_bears.lost)
+    assert_equal(0, furry_bears.points)
+  end
+
   def test_team_name_in_teams
     league_controller = LeagueController.new()
     test_teams = {}
