@@ -20,6 +20,10 @@ class LeagueController
   # adds new teams and updates team attributes won, tied, lost.
   def add_games(a_games_string)
 
+    if (a_games_string.nil? || ('' == a_games_string))
+      return
+    end
+
     a_games_string.each_line do |line|
       # add game
       # use chomp to remove line ending (platform independent \n, \r)
