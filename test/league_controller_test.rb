@@ -43,9 +43,14 @@ END
     league_controller.add_games(@games_string_ascii)
     assert_equal(5, league_controller.games.length)
 
-    test_game = league_controller.games[0]
-    assert_equal('Lions', test_game.game_teams[0].name)
-    assert_equal(3, test_game.game_teams[0].score)
+    assert_equal(["Lions", "Tarantulas", "Lions", "Tarantulas", "Lions"],
+                 league_controller.games.map{ |game| game.game_teams[0].name })
+    assert_equal([3, 1, 1, 3, 4],
+                 league_controller.games.map{ |game| game.game_teams[0].score })
+    assert_equal(["Snakes", "FC Awesome", "FC Awesome", "Snakes", "Grouches"],
+                 league_controller.games.map{ |game| game.game_teams[1].name })
+    assert_equal([3, 0, 1, 1, 0],
+                 league_controller.games.map{ |game| game.game_teams[1].score })
 
     league_controller = LeagueController.new()
     league_controller.add_games(@games_string_utf8)
