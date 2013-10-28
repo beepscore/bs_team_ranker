@@ -23,7 +23,7 @@ Lions 3, Snakes 3
 Tarantulas 1, FC Awesome 0
 Lions 1, FC Awesome 1
 Tarantulas 3, Snakes 1
-áƏĭö 14, ƩƿƔƸȢ 268
+áƏĭö 14, ƩƿƔƸȢ 268, Furry Bears 98
 Lions 4, Grouches 0
 END
   end
@@ -58,6 +58,8 @@ END
     test_game = a_league_controller.games[4]
     assert_equal('ƩƿƔƸȢ', test_game.game_teams[1].name)
     assert_equal(268, test_game.game_teams[1].score)
+    assert_equal('Furry Bears', test_game.game_teams[2].name)
+    assert_equal(98, test_game.game_teams[2].score)
   end
 
   def test_add_games_multiple_times
@@ -87,6 +89,17 @@ END
     assert(a_league_controller.team_name_in_teams?(test_teams, 'Flounders'))
     assert(a_league_controller.team_name_in_teams?(test_teams, 'Boom'))
     assert(!a_league_controller.team_name_in_teams?(test_teams, 'Kicks'))
+  end
+
+  def test_teams_in_game
+    league_controller = LeagueController.new()
+    league_controller.add_games(@games_string_ascii)
+    assert_equal(2, league_controller.teams_in_game(league_controller.games[0]).size)
+
+    # expect allow more than 2 teams in a game
+    league_controller = LeagueController.new()
+    league_controller.add_games(@games_string_utf8)
+    assert_equal(3, league_controller.teams_in_game(league_controller.games[4]).size)
   end
 
   def test_add_games_updates_teams

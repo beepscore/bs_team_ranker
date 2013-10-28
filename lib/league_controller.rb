@@ -50,10 +50,10 @@ class LeagueController
   # private API. Exposed for use by unit tests
   # returns team instances matching a_game game_team instances
   def teams_in_game(a_game)
-    teams_in_game = []
+    teams_in_game = {}
     a_game.game_teams.each do |game_team|
       team_in_game = @teams[game_team.name.to_sym]
-      teams_in_game.push(team_in_game)
+      teams_in_game[game_team.name.to_sym] = team_in_game
     end
     teams_in_game
   end
@@ -80,7 +80,7 @@ class LeagueController
     teams_in_game = teams_in_game(a_game)
     teams_with_score_max = teams_with_score_max(a_game)
 
-    teams_in_game.each do |team_in_game|
+    teams_in_game.each_value do |team_in_game|
 
       if !teams_with_score_max.include?(team_in_game)
         # team isn't in group with high score
