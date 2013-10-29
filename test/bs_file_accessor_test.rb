@@ -93,9 +93,33 @@ END
     assert(File.exists?('./junk.txt'))
 
     # On OS X in terminal, output file shows as us-ascii
-    # file -I junk.txt
+    # $ file -I junk.txt
     # junk.txt: text/plain; charset=us-ascii
 
   end
 
+  def test_write_utf8
+    test_games_string = <<END
+Lions 3, Snakes 3
+Tarantulas 1, FC Awesome 0
+Lions 1, FC Awesome 1
+Tarantulas 3, Snakes 1
+áƏĭö 14, ƩƿƔƸȢ 268, Furry Bears 98
+Lions 4, Grouches 0
+END
+    # clean up before opening file
+    if File.exists?('./junk_utf8.txt')
+      File.delete('./junk_utf8.txt')
+    end
+    assert(!File.exists?('./junk_utf8.txt'))
+
+    file_accessor = BSFileAccessor.new
+    file_accessor.write(test_games_string, './junk_utf8.txt')
+
+    assert(File.exists?('./junk_utf8.txt'))
+
+    # On OS X in terminal, output file shows as utf-8
+    # $ file -I junk_utf8.txt
+    # junk_utf8.txt: text/plain; charset=utf-8
+  end
 end
