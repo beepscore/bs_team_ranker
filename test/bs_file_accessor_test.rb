@@ -77,19 +77,19 @@ class BSFileAccessorTest < MiniTest::Unit::TestCase
 
   def test_write_utf8
     # clean up before opening file
-    if File.exists?('./junk_utf8.txt')
-      File.delete('./junk_utf8.txt')
+    if File.exists?('./junk-utf8.txt')
+      File.delete('./junk-utf8.txt')
     end
-    assert(!File.exists?('./junk_utf8.txt'))
+    assert(!File.exists?('./junk-utf8.txt'))
 
     file_accessor = BSFileAccessor.new
-    file_accessor.write(GAMES_STRING_UTF8, './junk_utf8.txt')
+    file_accessor.write(GAMES_STRING_UTF8, './junk-utf8.txt')
 
-    assert(File.exists?('./junk_utf8.txt'))
+    assert(File.exists?('./junk-utf8.txt'))
 
     # On OS X in terminal, output file shows as utf-8
-    # $ file -I junk_utf8.txt
-    # junk_utf8.txt: text/plain; charset=utf-8
+    # $ file -I junk-utf8.txt
+    # junk-utf8.txt: text/plain; charset=utf-8
   end
 
 end
