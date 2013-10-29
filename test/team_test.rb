@@ -6,19 +6,19 @@ require_relative '../lib/team'
 class TeamTest < MiniTest::Unit::TestCase
 
   def test_new_sets_name
-    team = Team.new('Ravens')
+    team = BSTeamRanker::Team.new('Ravens')
     assert_equal('Ravens', team.name)
   end
 
   def test_new_sets_won_tied_lost
-    team = Team.new('Alphas')
+    team = BSTeamRanker::Team.new('Alphas')
     assert_equal(0, team.won)
     assert_equal(0, team.tied)
     assert_equal(0, team.lost)
   end
 
   def test_points
-    team = Team.new('Alphas')
+    team = BSTeamRanker::Team.new('Alphas')
     assert_equal(0, team.points)
 
     team.won = 1
