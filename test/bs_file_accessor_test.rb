@@ -6,6 +6,28 @@ require_relative '../lib/bs_file_accessor'
 
 class BSFileAccessorTest < MiniTest::Unit::TestCase
 
+  attr_reader :games_string_ascii
+  attr_reader :games_string_utf8
+
+  def setup
+    @games_string_ascii = <<END
+Lions 3, Snakes 3
+Tarantulas 1, FC Awesome 0
+Lions 1, FC Awesome 1
+Tarantulas 3, Snakes 1
+Lions 4, Grouches 0
+END
+
+    @games_string_utf8 = <<END
+Lions 3, Snakes 3
+Tarantulas 1, FC Awesome 0
+Lions 1, FC Awesome 1
+Tarantulas 3, Snakes 1
+áƏĭö 14, ƩƿƔƸȢ 268, Furry Bears 98
+Lions 4, Grouches 0
+END
+  end
+
   def test_string_from_file_sets_file_encoding
     # Terminal file command shows
     # $ file sample-input.txt
@@ -48,39 +70,16 @@ class BSFileAccessorTest < MiniTest::Unit::TestCase
     actual_result = file_accessor.string_from_file('./sample-input.txt', 'utf-8')
     puts
     puts "file_string: #{actual_result}"
-    expected_result = <<END
-Lions 3, Snakes 3
-Tarantulas 1, FC Awesome 0
-Lions 1, FC Awesome 1
-Tarantulas 3, Snakes 1
-Lions 4, Grouches 0
-END
-    assert_equal(expected_result, actual_result)
+    assert_equal(@games_string_ascii, actual_result)
 
     file_accessor = BSFileAccessor.new
     actual_result = file_accessor.string_from_file('./sample-input-utf8.txt', 'utf-8')
     puts
     puts "file_string: #{actual_result}"
-    expected_result = <<END
-Lions 3, Snakes 3
-Tarantulas 1, FC Awesome 0
-Lions 1, FC Awesome 1
-Tarantulas 3, Snakes 1
-áƏĭö 14, ƩƿƔƸȢ 268, Furry Bears 98
-Lions 4, Grouches 0
-END
-    assert_equal(expected_result, actual_result)
+    assert_equal(@games_string_utf8, actual_result)
   end
 
   def test_write
-    test_games_string = <<END
-Lions 3, Snakes 3
-Tarantulas 1, FC Awesome 0
-Lions 1, FC Awesome 1
-Tarantulas 3, Snakes 1
-Lions 4, Grouches 0
-END
-
     # clean up before opening file
     if File.exists?('./junk.txt')
       File.delete('./junk.txt')
@@ -88,25 +87,16 @@ END
     assert(!File.exists?('./junk.txt'))
 
     file_accessor = BSFileAccessor.new
-    file_accessor.write(test_games_string, './junk.txt')
+    file_accessor.write(@games_string_ascii, './junk.txt')
 
     assert(File.exists?('./junk.txt'))
 
     # On OS X in terminal, output file shows as us-ascii
     # $ file -I junk.txt
     # junk.txt: text/plain; charset=us-ascii
-
   end
 
   def test_write_utf8
-    test_games_string = <<END
-Lions 3, Snakes 3
-Tarantulas 1, FC Awesome 0
-Lions 1, FC Awesome 1
-Tarantulas 3, Snakes 1
-áƏĭö 14, ƩƿƔƸȢ 268, Furry Bears 98
-Lions 4, Grouches 0
-END
     # clean up before opening file
     if File.exists?('./junk_utf8.txt')
       File.delete('./junk_utf8.txt')
@@ -114,7 +104,7 @@ END
     assert(!File.exists?('./junk_utf8.txt'))
 
     file_accessor = BSFileAccessor.new
-    file_accessor.write(test_games_string, './junk_utf8.txt')
+    file_accessor.write(@games_string_utf8, './junk_utf8.txt')
 
     assert(File.exists?('./junk_utf8.txt'))
 
@@ -122,4 +112,5 @@ END
     # $ file -I junk_utf8.txt
     # junk_utf8.txt: text/plain; charset=utf-8
   end
+
 end
