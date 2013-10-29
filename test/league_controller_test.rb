@@ -257,4 +257,23 @@ END
     assert_equal(expected_result, actual_result)
   end
 
+  def test_write_ranked_teams_utf8
+    league_controller = LeagueController.new()
+    league_controller.add_games(@games_string_utf8)
+    actual_result = league_controller.write_ranked_teams(league_controller.ranked_teams(league_controller.teams))
+
+    expected_result = <<END
+1. Tarantulas, 6 pts
+2. Lions, 5 pts
+3. ƩƿƔƸȢ, 3 pts
+4. FC Awesome, 1 pt
+4. Snakes, 1 pt
+6. Furry Bears, 0 pts
+6. Grouches, 0 pts
+6. áƏĭö, 0 pts
+END
+
+    assert_equal(expected_result, actual_result)
+  end
+
 end
