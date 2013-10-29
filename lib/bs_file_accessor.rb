@@ -4,9 +4,12 @@ class BSFileAccessor
 
   attr_reader :file_encoding
   attr_reader :file_name
-  attr_reader :file_string
 
-  def initialize(file_name, external_encoding)
+  def initialize
+  end
+
+  # read a file and return a string
+  def string_from_file(file_name, external_encoding)
     @file_name = file_name
 
     # ruby 1.9.3 and ruby 2.0 default_external encoding is UTF-8
@@ -26,17 +29,18 @@ class BSFileAccessor
       read_access_and_encoding = "r:#{external_encoding}:#{internal_encoding}"
     end
 
+    file_string = ""
     # at end of block, file will be closed automatically
     File.open(@file_name, read_access_and_encoding) do |file|
 
       @file_encoding = file.external_encoding
 
-      @file_string = ""
       file.each_line do |line|
-        @file_string += line
+        file_string += line
       end
     end
 
+    file_string
   end
 
 end
