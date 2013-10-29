@@ -161,45 +161,14 @@ END
     ƩƿƔƸȢ = league_controller.teams['ƩƿƔƸȢ'.to_sym]
     furry_bears = league_controller.teams['Furry Bears'.to_sym]
 
-    assert_equal(1, lions.won)
-    assert_equal(2, lions.tied)
-    assert_equal(0, lions.lost)
-    assert_equal(5, lions.points)
-
-    assert_equal(0, snakes.won)
-    assert_equal(1, snakes.tied)
-    assert_equal(1, snakes.lost)
-    assert_equal(1, snakes.points)
-
-    assert_equal(2, tarantulas.won)
-    assert_equal(0, tarantulas.tied)
-    assert_equal(0, tarantulas.lost)
-    assert_equal(6, tarantulas.points)
-
-    assert_equal(0, fc_awesome.won)
-    assert_equal(1, fc_awesome.tied)
-    assert_equal(1, fc_awesome.lost)
-    assert_equal(1, fc_awesome.points)
-
-    assert_equal(0, grouches.won)
-    assert_equal(0, grouches.tied)
-    assert_equal(1, grouches.lost)
-    assert_equal(0, grouches.points)
-
-    assert_equal(0, áƏĭö.won)
-    assert_equal(0, áƏĭö.tied)
-    assert_equal(1, áƏĭö.lost)
-    assert_equal(0, áƏĭö.points)
-
-    assert_equal(1, ƩƿƔƸȢ.won)
-    assert_equal(0, ƩƿƔƸȢ.tied)
-    assert_equal(0, ƩƿƔƸȢ.lost)
-    assert_equal(3, ƩƿƔƸȢ.points)
-
-    assert_equal(0, furry_bears.won)
-    assert_equal(0, furry_bears.tied)
-    assert_equal(1, furry_bears.lost)
-    assert_equal(0, furry_bears.points)
+    assert_equal([1, 2, 0, 5], [lions.won, lions.tied, lions.lost, lions.points])
+    assert_equal([0, 1, 1, 1], [snakes.won, snakes.tied, snakes.lost, snakes.points])
+    assert_equal([2, 0, 0, 6], [tarantulas.won, tarantulas.tied, tarantulas.lost, tarantulas.points])
+    assert_equal([0, 1, 1, 1], [fc_awesome.won, fc_awesome.tied, fc_awesome.lost, fc_awesome.points])
+    assert_equal([0, 0, 1, 0], [grouches.won, grouches.tied, grouches.lost, grouches.points])
+    assert_equal([0, 0, 1, 0], [áƏĭö.won, áƏĭö.tied, áƏĭö.lost, áƏĭö.points])
+    assert_equal([1, 0, 0, 3], [ƩƿƔƸȢ.won, ƩƿƔƸȢ.tied, ƩƿƔƸȢ.lost, ƩƿƔƸȢ.points])
+    assert_equal([0, 0, 1, 0], [furry_bears.won, furry_bears.tied, furry_bears.lost, furry_bears.points])
   end
 
   def test_team_name_in_teams
