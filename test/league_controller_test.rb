@@ -102,30 +102,11 @@ END
     fc_awesome = league_controller.teams['FC Awesome'.to_sym]
     grouches = league_controller.teams['Grouches'.to_sym]
 
-    assert_equal(1, lions.won)
-    assert_equal(2, lions.tied)
-    assert_equal(0, lions.lost)
-    assert_equal(5, lions.points)
-
-    assert_equal(0, snakes.won)
-    assert_equal(1, snakes.tied)
-    assert_equal(1, snakes.lost)
-    assert_equal(1, snakes.points)
-
-    assert_equal(2, tarantulas.won)
-    assert_equal(0, tarantulas.tied)
-    assert_equal(0, tarantulas.lost)
-    assert_equal(6, tarantulas.points)
-
-    assert_equal(0, fc_awesome.won)
-    assert_equal(1, fc_awesome.tied)
-    assert_equal(1, fc_awesome.lost)
-    assert_equal(1, fc_awesome.points)
-
-    assert_equal(0, grouches.won)
-    assert_equal(0, grouches.tied)
-    assert_equal(1, grouches.lost)
-    assert_equal(0, grouches.points)
+    assert_equal([1, 2, 0, 5], [lions.won, lions.tied, lions.lost, lions.points])
+    assert_equal([0, 1, 1, 1], [snakes.won, snakes.tied, snakes.lost, snakes.points])
+    assert_equal([2, 0, 0, 6], [tarantulas.won, tarantulas.tied, tarantulas.lost, tarantulas.points])
+    assert_equal([0, 1, 1, 1], [fc_awesome.won, fc_awesome.tied, fc_awesome.lost, fc_awesome.points])
+    assert_equal([0, 0, 1, 0], [grouches.won, grouches.tied, grouches.lost, grouches.points])
   end
 
   def test_add_games_team_names_utf8
