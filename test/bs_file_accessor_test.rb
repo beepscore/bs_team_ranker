@@ -72,4 +72,30 @@ END
     assert_equal(expected_result, actual_result)
   end
 
+  def test_write
+    test_games_string = <<END
+Lions 3, Snakes 3
+Tarantulas 1, FC Awesome 0
+Lions 1, FC Awesome 1
+Tarantulas 3, Snakes 1
+Lions 4, Grouches 0
+END
+
+    # clean up before opening file
+    if File.exists?('./junk.txt')
+      File.delete('./junk.txt')
+    end
+    assert(!File.exists?('./junk.txt'))
+
+    file_accessor = BSFileAccessor.new
+    file_accessor.write(test_games_string, './junk.txt')
+
+    assert(File.exists?('./junk.txt'))
+
+    # On OS X in terminal, output file shows as us-ascii
+    # file -I junk.txt
+    # junk.txt: text/plain; charset=us-ascii
+
+  end
+
 end

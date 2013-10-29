@@ -43,4 +43,15 @@ class BSFileAccessor
     file_string
   end
 
+  def write(a_string, to_file)
+    # References
+    # Learn Ruby the Hard Way ex20.rb
+    # http://stackoverflow.com/questions/4795447/rubys-file-open-and-the-need-for-f-close
+
+    output = File.open(to_file, 'w')
+    output.write(a_string)
+    output.close()
+    puts "Wrote to file #{to_file}"
+  end
+
 end
