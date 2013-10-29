@@ -3,30 +3,9 @@
 require 'minitest/unit'
 require 'minitest/autorun'
 require_relative '../lib/league_controller'
+require_relative 'bs_test_constants'
 
 class LeagueControllerTest < MiniTest::Unit::TestCase
-
-  attr_reader :games_string_ascii
-  attr_reader :games_string_utf8
-
-  def setup
-    @games_string_ascii = <<END
-Lions 3, Snakes 3
-Tarantulas 1, FC Awesome 0
-Lions 1, FC Awesome 1
-Tarantulas 3, Snakes 1
-Lions 4, Grouches 0
-END
-
-    @games_string_utf8 = <<END
-Lions 3, Snakes 3
-Tarantulas 1, FC Awesome 0
-Lions 1, FC Awesome 1
-Tarantulas 3, Snakes 1
-áƏĭö 14, ƩƿƔƸȢ 268, Furry Bears 98
-Lions 4, Grouches 0
-END
-  end
 
   def test_new_sets_games
     league_controller = LeagueController.new()
@@ -40,7 +19,7 @@ END
 
   def test_add_games
     league_controller = LeagueController.new()
-    league_controller.add_games(@games_string_ascii)
+    league_controller.add_games(GAMES_STRING_ASCII)
     assert_equal(5, league_controller.games.length)
 
     assert_equal(["Lions", "Tarantulas", "Lions", "Tarantulas", "Lions"],
@@ -53,7 +32,7 @@ END
                  league_controller.games.map{ |game| game.game_teams[1].score })
 
     league_controller = LeagueController.new()
-    league_controller.add_games(@games_string_utf8)
+    league_controller.add_games(GAMES_STRING_UTF8)
     assert_equal(6, league_controller.games.length)
 
     test_game = league_controller.games[1]
@@ -70,11 +49,11 @@ END
   def test_add_games_multiple_times
     league_controller = LeagueController.new()
     assert_equal(0, league_controller.games.length)
-    league_controller.add_games(@games_string_ascii)
+    league_controller.add_games(GAMES_STRING_ASCII)
     assert_equal(5, league_controller.games.length)
-    league_controller.add_games(@games_string_utf8)
+    league_controller.add_games(GAMES_STRING_UTF8)
     assert_equal(11, league_controller.games.length)
-    league_controller.add_games(@games_string_ascii)
+    league_controller.add_games(GAMES_STRING_ASCII)
     assert_equal(16, league_controller.games.length)
   end
 
@@ -87,7 +66,7 @@ END
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Grouches'))
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Elephants'))
 
-    league_controller.add_games(@games_string_ascii)
+    league_controller.add_games(GAMES_STRING_ASCII)
 
     assert(league_controller.team_name_in_teams?(league_controller.teams, 'Lions'))
     assert(league_controller.team_name_in_teams?(league_controller.teams, 'Snakes'))
@@ -121,7 +100,7 @@ END
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Furry Bears'))
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Elephants'))
 
-    league_controller.add_games(@games_string_utf8)
+    league_controller.add_games(GAMES_STRING_UTF8)
 
     assert(league_controller.team_name_in_teams?(league_controller.teams, 'Lions'))
     assert(league_controller.team_name_in_teams?(league_controller.teams, 'Snakes'))
@@ -172,18 +151,18 @@ END
 
   def test_teams_in_game
     league_controller = LeagueController.new()
-    league_controller.add_games(@games_string_ascii)
+    league_controller.add_games(GAMES_STRING_ASCII)
     assert_equal(2, league_controller.teams_in_game(league_controller.games[0]).size)
 
     # expect allow more than 2 teams in a game
     league_controller = LeagueController.new()
-    league_controller.add_games(@games_string_utf8)
+    league_controller.add_games(GAMES_STRING_UTF8)
     assert_equal(3, league_controller.teams_in_game(league_controller.games[4]).size)
   end
 
   def test_ranked_teams
     league_controller = LeagueController.new()
-    league_controller.add_games(@games_string_ascii)
+    league_controller.add_games(GAMES_STRING_ASCII)
 
     actual_ranked_teams = league_controller.ranked_teams(league_controller.teams)
     assert_equal('Tarantulas', actual_ranked_teams[0].name)
@@ -193,7 +172,7 @@ END
 
   def test_write_ranked_teams
     league_controller = LeagueController.new()
-    league_controller.add_games(@games_string_ascii)
+    league_controller.add_games(GAMES_STRING_ASCII)
     actual_result = league_controller.write_ranked_teams(league_controller.ranked_teams(league_controller.teams))
 
     expected_result = <<END
@@ -209,7 +188,7 @@ END
 
   def test_write_ranked_teams_utf8
     league_controller = LeagueController.new()
-    league_controller.add_games(@games_string_utf8)
+    league_controller.add_games(GAMES_STRING_UTF8)
     actual_result = league_controller.write_ranked_teams(league_controller.ranked_teams(league_controller.teams))
 
     expected_result = <<END

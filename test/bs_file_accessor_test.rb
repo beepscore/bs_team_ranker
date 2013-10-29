@@ -3,30 +3,9 @@
 require 'minitest/unit'
 require 'minitest/autorun'
 require_relative '../lib/bs_file_accessor'
+require_relative 'bs_test_constants'
 
 class BSFileAccessorTest < MiniTest::Unit::TestCase
-
-  attr_reader :games_string_ascii
-  attr_reader :games_string_utf8
-
-  def setup
-    @games_string_ascii = <<END
-Lions 3, Snakes 3
-Tarantulas 1, FC Awesome 0
-Lions 1, FC Awesome 1
-Tarantulas 3, Snakes 1
-Lions 4, Grouches 0
-END
-
-    @games_string_utf8 = <<END
-Lions 3, Snakes 3
-Tarantulas 1, FC Awesome 0
-Lions 1, FC Awesome 1
-Tarantulas 3, Snakes 1
-áƏĭö 14, ƩƿƔƸȢ 268, Furry Bears 98
-Lions 4, Grouches 0
-END
-  end
 
   def test_string_from_file_sets_file_encoding
     # Terminal file command shows
@@ -70,13 +49,13 @@ END
     actual_result = file_accessor.string_from_file('./sample-input.txt', 'utf-8')
     puts
     puts "file_string: #{actual_result}"
-    assert_equal(@games_string_ascii, actual_result)
+    assert_equal(GAMES_STRING_ASCII, actual_result)
 
     file_accessor = BSFileAccessor.new
     actual_result = file_accessor.string_from_file('./sample-input-utf8.txt', 'utf-8')
     puts
     puts "file_string: #{actual_result}"
-    assert_equal(@games_string_utf8, actual_result)
+    assert_equal(GAMES_STRING_UTF8, actual_result)
   end
 
   def test_write
@@ -87,7 +66,7 @@ END
     assert(!File.exists?('./junk.txt'))
 
     file_accessor = BSFileAccessor.new
-    file_accessor.write(@games_string_ascii, './junk.txt')
+    file_accessor.write(GAMES_STRING_ASCII, './junk.txt')
 
     assert(File.exists?('./junk.txt'))
 
@@ -104,7 +83,7 @@ END
     assert(!File.exists?('./junk_utf8.txt'))
 
     file_accessor = BSFileAccessor.new
-    file_accessor.write(@games_string_utf8, './junk_utf8.txt')
+    file_accessor.write(GAMES_STRING_UTF8, './junk_utf8.txt')
 
     assert(File.exists?('./junk_utf8.txt'))
 
