@@ -2,7 +2,7 @@
 
 require_relative 'game'
 
-module BSTeamRanker
+module BsTeamRanker
   class LeagueController
 
     attr_reader :games

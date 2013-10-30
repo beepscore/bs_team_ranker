@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module BSTeamRanker
+module BsTeamRanker
   # GameTeam is a lightweight team for use by Game
   class GameTeam
 

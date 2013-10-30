@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-module BSTeamRanker
-  class BSFileAccessor
+module BsTeamRanker
+  class BsFileAccessor
 
     attr_reader :file_encoding
     attr_reader :file_name

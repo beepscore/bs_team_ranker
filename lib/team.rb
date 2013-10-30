@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-module BSTeamRanker
+module BsTeamRanker
   class Team
 
     attr_reader   :name

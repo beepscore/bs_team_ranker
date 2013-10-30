@@ -2,7 +2,7 @@
 
 require_relative 'game_team'
 
-module BSTeamRanker
+module BsTeamRanker
   class Game
 
     # Use a collection in order to follow DRY principle
