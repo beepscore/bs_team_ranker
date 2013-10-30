@@ -8,17 +8,17 @@ require_relative 'bs_test_constants'
 class LeagueControllerTest < MiniTest::Unit::TestCase
 
   def test_new_sets_games
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     assert_equal([], league_controller.games)
   end
 
   def test_new_sets_teams
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     assert_equal({}, league_controller.teams)
   end
 
   def test_add_games
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     league_controller.add_games(GAMES_STRING_ASCII)
     assert_equal(5, league_controller.games.length)
 
@@ -31,7 +31,7 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
     assert_equal([3, 0, 1, 1, 0],
                  league_controller.games.map{ |game| game.game_teams[1].score })
 
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     league_controller.add_games(GAMES_STRING_UTF8)
     assert_equal(6, league_controller.games.length)
 
@@ -47,7 +47,7 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
   end
 
   def test_add_games_multiple_times
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     assert_equal(0, league_controller.games.length)
     league_controller.add_games(GAMES_STRING_ASCII)
     assert_equal(5, league_controller.games.length)
@@ -58,7 +58,7 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
   end
 
   def test_add_games_updates_teams
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Lions'))
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Snakes'))
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Tarantulas'))
@@ -89,7 +89,7 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
   end
 
   def test_add_games_team_names_utf8
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Lions'))
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Snakes'))
     assert(!league_controller.team_name_in_teams?(league_controller.teams, 'Tarantulas'))
@@ -132,7 +132,7 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
   end
 
   def test_team_name_in_teams
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     test_teams = {}
     assert(!league_controller.team_name_in_teams?(test_teams, 'Flounders'))
     assert(!league_controller.team_name_in_teams?(test_teams, 'Boom'))
@@ -150,18 +150,18 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
   end
 
   def test_teams_in_game
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     league_controller.add_games(GAMES_STRING_ASCII)
     assert_equal(2, league_controller.teams_in_game(league_controller.games[0]).size)
 
     # expect allow more than 2 teams in a game
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     league_controller.add_games(GAMES_STRING_UTF8)
     assert_equal(3, league_controller.teams_in_game(league_controller.games[4]).size)
   end
 
   def test_ranked_teams
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     league_controller.add_games(GAMES_STRING_ASCII)
 
     actual_ranked_teams = league_controller.ranked_teams(league_controller.teams)
@@ -171,7 +171,7 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
   end
 
   def test_ranked_teams_string_ascii
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     league_controller.add_games(GAMES_STRING_ASCII)
     actual_result = league_controller.ranked_teams_string(league_controller.ranked_teams(league_controller.teams))
 
@@ -187,7 +187,7 @@ END
   end
 
   def test_ranked_teams_string_utf8
-    league_controller = BsTeamRanker::LeagueController.new()
+    league_controller = BsTeamRanker::LeagueController.new
     league_controller.add_games(GAMES_STRING_UTF8)
     actual_result = league_controller.ranked_teams_string(league_controller.ranked_teams(league_controller.teams))
 

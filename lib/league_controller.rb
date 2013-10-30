@@ -9,7 +9,7 @@ module BsTeamRanker
     attr_reader :games
     attr_accessor :teams
 
-    def initialize()
+    def initialize
 
       @games = []
       # Use hash for faster lookup than array.

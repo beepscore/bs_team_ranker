@@ -70,7 +70,7 @@ Example:
       # parse! consumes options and parameters from ARGV, leaves remaining args
       opt_parser.parse!(args)
       options
-    end  # parse()
+    end  # parse
 
   end  # class
 end  # module
@@ -81,7 +81,7 @@ pp options
 pp ARGV
 
 file_accessor = BsTeamRanker::BsFileAccessor.new
-league_controller = BsTeamRanker::LeagueController.new()
+league_controller = BsTeamRanker::LeagueController.new
 ARGV.each do |infile|
   puts "Adding games #{infile}"
   games_string = file_accessor.string_from_file(infile, 'utf-8')

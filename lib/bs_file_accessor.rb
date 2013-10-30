@@ -51,7 +51,7 @@ module BsTeamRanker
 
       output = File.open(to_file, 'w')
       output.write(a_string)
-      output.close()
+      output.close
       puts "Wrote to file #{to_file}"
     end
 
