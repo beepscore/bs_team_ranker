@@ -10,7 +10,7 @@ module BsTeamRanker
   # Rank teams
   class BsTeamRanker
 
-    OUTPUT_FILE_NAME_DEFAULT = 'junk_ranks.txt'
+    OUTPUT_FILE_NAME_DEFAULT = '../ranks.txt'
 
     # Return a structure describing the options.
     # References
@@ -92,6 +92,4 @@ ranked_teams = league_controller.ranked_teams(league_controller.teams)
 ranked_string = league_controller.ranked_teams_string(ranked_teams)
 puts ranked_string
 
-# TODO use outfile supplied from options
-# outfile = options...
-file_accessor.write(ranked_string, '../junk_rank.txt')
+file_accessor.write(ranked_string, options.output_file_name)
