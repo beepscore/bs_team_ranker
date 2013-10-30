@@ -170,10 +170,10 @@ class LeagueControllerTest < MiniTest::Unit::TestCase
                  actual_ranked_teams.map{ |team| team.name })
   end
 
-  def test_write_ranked_teams
+  def test_ranked_teams_string_ascii
     league_controller = BsTeamRanker::LeagueController.new()
     league_controller.add_games(GAMES_STRING_ASCII)
-    actual_result = league_controller.write_ranked_teams(league_controller.ranked_teams(league_controller.teams))
+    actual_result = league_controller.ranked_teams_string(league_controller.ranked_teams(league_controller.teams))
 
     expected_result = <<END
 1. Tarantulas, 6 pts
@@ -186,10 +186,10 @@ END
     assert_equal(expected_result, actual_result)
   end
 
-  def test_write_ranked_teams_utf8
+  def test_ranked_teams_string_utf8
     league_controller = BsTeamRanker::LeagueController.new()
     league_controller.add_games(GAMES_STRING_UTF8)
-    actual_result = league_controller.write_ranked_teams(league_controller.ranked_teams(league_controller.teams))
+    actual_result = league_controller.ranked_teams_string(league_controller.ranked_teams(league_controller.teams))
 
     expected_result = <<END
 1. Tarantulas, 6 pts

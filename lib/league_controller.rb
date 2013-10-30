@@ -120,8 +120,8 @@ module BsTeamRanker
       ranked.sort_by!{ |team| [-team.points, team.name] }
     end
 
-    # write ranked teams to a file
-    def write_ranked_teams(a_ranked_teams)
+    # return ranked teams string
+    def ranked_teams_string(a_ranked_teams)
 
       ranked_string = ''
       rank = 1
@@ -146,9 +146,6 @@ module BsTeamRanker
         previous_team_points = team.points
       end
 
-      puts
-      puts ranked_string
-      # TODO Write to file
       ranked_string
     end
 
