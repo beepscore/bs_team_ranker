@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative 'game'
+require_relative 'team'
 
 module BsTeamRanker
   class LeagueController
