@@ -2,7 +2,7 @@
 
 require 'minitest/unit'
 require 'minitest/autorun'
-require_relative '../lib/bs_file_accessor'
+require_relative '../lib/bs_team_ranker/bs_file_accessor'
 require_relative 'bs_test_constants'
 
 class BsFileAccessorTest < MiniTest::Unit::TestCase

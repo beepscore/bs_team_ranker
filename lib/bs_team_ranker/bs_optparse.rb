@@ -2,13 +2,13 @@
 
 require 'optparse'
 require 'ostruct'
-require_relative './bs_team_ranker/version'
+require_relative 'version'
 
 module BsTeamRanker
   # Rank teams
   class BsOptparse
 
-    OUTPUT_FILE_NAME_DEFAULT = '../ranks.txt'
+    OUTPUT_FILE_NAME_DEFAULT = '../../ranks.txt'
 
     # Return a structure describing the options.
     # Alters an_args. Consumes options and parameters from an_args, leaves remaining args

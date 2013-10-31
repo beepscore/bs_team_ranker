@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'minitest/unit'
-require_relative '../lib/game_team'
+require_relative '../lib/bs_team_ranker/game_team'
 
 class GameTeamTest < MiniTest::Unit::TestCase
 

@@ -2,7 +2,7 @@
 
 require 'minitest/unit'
 require 'minitest/autorun'
-require_relative '../lib/league_controller'
+require_relative '../lib/bs_team_ranker/league_controller'
 require_relative 'bs_test_constants'
 
 class LeagueControllerTest < MiniTest::Unit::TestCase
