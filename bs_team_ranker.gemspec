@@ -6,7 +6,7 @@ require 'bs_team_ranker/version'
 Gem::Specification.new do |spec|
   spec.name          = "bs_team_ranker"
   spec.version       = BsTeamRanker::VERSION
-  spec.authors       = ["beepscore"]
+  spec.authors       = ["Beepscore LLC"]
   spec.email         = ["support@beepscore.com"]
   spec.description   = %q{Calculates the ranking table for a soccer league.}
   spec.summary       = %q{Calculates the ranking table for a soccer league.}
