@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    bs_team_ranker (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -9,6 +14,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bs_team_ranker!
+  bundler (~> 1.3)
   minitest (>= 4.3.2)
-  rake (>= 10.1.0)
+  rake
   test-unit (>= 2.5.5)
