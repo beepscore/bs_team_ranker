@@ -10,6 +10,7 @@ require_relative 'test/game_test'
 require_relative 'test/team_test'
 require_relative 'test/bs_file_accessor_test'
 require_relative 'test/league_controller_test'
+require_relative 'test/bs_optparse_test'
 
 
 # http://rake.rubyforge.org/
