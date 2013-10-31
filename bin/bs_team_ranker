@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/bs_team_ranker/runner'
-# TODO: publish bs_team_ranker privately as a gem, change require_relative to require?
-#require 'bs_team_ranker/runner'
+# TODO: publish as a gem
+# Without a gem, can cd to project directory bs_team_ranker and run app as
+# $ ruby -I lib bin/bs_team_ranker -o './junk-out.txt' './sample-input.txt'
+require 'bs_team_ranker/runner'
 
 runner = BsTeamRanker::Runner.new(ARGV)
 runner.run
