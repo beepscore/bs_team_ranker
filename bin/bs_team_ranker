@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
 require 'pp'
-require_relative 'bs_optparse'
-require_relative 'bs_file_accessor'
-require_relative 'league_controller'
+require_relative '../lib/bs_optparse'
+require_relative '../lib/bs_file_accessor'
+require_relative '../lib/league_controller'
 
 # parse! alters its argument, see method description for details
 options = BsTeamRanker::BsOptparse.parse!(ARGV)
