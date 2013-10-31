@@ -23,3 +23,6 @@ doc/
 
 # In this project, vendor contains third party files such bundler installed local gems
 vendor/
+
+# Don't ignore bin. This overrides setting in .gitignore_global.
+!bin
