@@ -1,10 +1,9 @@
+source 'https://rubygems.org'
+
 # Reference
 # http://bundler.io/v1.3/gemfile.html
-source "https://rubygems.org"
-
-# http://bundler.io/v1.3/gemfile_ruby.html
 ruby '2.0.0'
 
-gem 'rake', '>=10.1.0'
-gem 'test-unit', '>=2.5.5'
-gem 'minitest', '>=4.3.2'
+# Specify your gem's dependencies in bs_team_ranker.gemspec
+gemspec
+
