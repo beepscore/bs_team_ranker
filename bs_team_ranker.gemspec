@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = BsTeamRanker::VERSION
   spec.authors       = ["beepscore"]
   spec.email         = ["support@beepscore.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Calculates the ranking table for a soccer league.}
+  spec.summary       = %q{Calculates the ranking table for a soccer league.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
