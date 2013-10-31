@@ -13,6 +13,13 @@ class BsOptparseTest < MiniTest::Unit::TestCase
     assert_equal(['./games-a.txt'], test_argv, 'expect parse! alters its argument')
   end
 
+  def test_parse_output_file_name_default
+    test_argv = ['./games-a.txt']
+    options = BsTeamRanker::BsOptparse.parse!(test_argv)
+    assert_equal(BsTeamRanker::OUTPUT_FILE_NAME_DEFAULT, options.output_file_name)
+    assert_equal(['./games-a.txt'], test_argv, 'expect parse! alters its argument')
+  end
+
   def test_parse_multiple_input
     test_argv = ['-o', './my-output.txt', './games-a.txt', './games-b.txt']
     options = BsTeamRanker::BsOptparse.parse!(test_argv)
