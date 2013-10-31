@@ -2,6 +2,7 @@
 
 require 'optparse'
 require 'ostruct'
+require_relative './bs_team_ranker/version'
 
 module BsTeamRanker
   # Rank teams
@@ -41,6 +42,11 @@ Example:
         # No argument
         opts.on("-h", "--help", "Show this message") do
           puts opts
+          exit
+        end
+
+        opts.on("-v", "--version", "Show version") do
+          puts BsTeamRanker::VERSION
           exit
         end
 
