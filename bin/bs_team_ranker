@@ -1,25 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'pp'
-require_relative '../lib/bs_team_ranker/bs_optparse'
-require_relative '../lib/bs_team_ranker/bs_file_accessor'
-require_relative '../lib/bs_team_ranker/league_controller'
+require_relative '../lib/bs_team_ranker/runner'
+# TODO: publish bs_team_ranker privately as a gem, change require_relative to require?
+#require 'bs_team_ranker/runner'
 
-# parse! alters its argument, see method description for details
-options = BsTeamRanker::BsOptparse.parse!(ARGV)
-pp options
-pp ARGV
-
-file_accessor = BsTeamRanker::BsFileAccessor.new
-league_controller = BsTeamRanker::LeagueController.new
-ARGV.each do |infile|
-  puts "Adding games #{infile}"
-  games_string = file_accessor.string_from_file(infile, 'utf-8')
-  league_controller.add_games(games_string)
-end
-
-ranked_teams = league_controller.ranked_teams(league_controller.teams)
-ranked_string = league_controller.ranked_teams_string(ranked_teams)
-puts ranked_string
-
-file_accessor.write(ranked_string, options.output_file_name)
+runner = BsTeamRanker::Runner.new(ARGV)
+runner.run
