@@ -3,6 +3,7 @@
 # TODO: publish as a gem
 # Without a gem, can cd to project directory bs_team_ranker and run app as
 # $ ruby -I lib bin/bs_team_ranker -o './junk-out.txt' './sample-input.txt'
+require 'bs_team_ranker'
 require 'bs_team_ranker/runner'
 
 runner = BsTeamRanker::Runner.new(ARGV)
