@@ -40,16 +40,16 @@ Examples:
         opts.separator ""
         opts.separator "Options:"
 
-        # Optional argument, uses delimiter []
-        opts.on("-o [OUTPUT_FILE_NAME]", "--outfile [OUTPUT_FILE_NAME]",
-                "Default #{OUTPUT_FILE_NAME_DEFAULT}") do |output_file|
-          options.output_file_name = output_file
-        end
-
-        # No argument
+        # This option doesn't take an argument
         opts.on("-h", "--help", "Show this message") do
           puts opts
           exit
+        end
+
+        # This option is optional because it's delimited by []
+        opts.on("-o [OUTPUT_FILE_NAME]", "--outfile [OUTPUT_FILE_NAME]",
+                "Default #{OUTPUT_FILE_NAME_DEFAULT}") do |output_file|
+          options.output_file_name = output_file
         end
 
         opts.on("-v", "--version", "Show version") do
