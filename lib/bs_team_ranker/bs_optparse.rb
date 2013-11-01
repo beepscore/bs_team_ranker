@@ -75,6 +75,11 @@ Example:
 
       # parse! consumes options and parameters from an_args, leaves remaining args
       opt_parser.parse!(an_args)
+      if an_args.empty?
+        puts "error: you must specify at least one games input file."
+        puts
+        puts opt_parser.help
+      end
       options
     end  # parse
 
