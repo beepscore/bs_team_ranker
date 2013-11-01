@@ -26,10 +26,15 @@ module BsTeamRanker
       executable_name = File.basename($PROGRAM_NAME)
       opt_parser = OptionParser.new do |opts|
         opts.banner = <<-END
+Writes a team ranks output file for one or more game input files.
 Usage:
   $ bundle exec #{executable_name} [options] input_file_name1 input_file_name2...
-Example:
+Examples:
   $ bundle exec #{executable_name} -o my_ranks.txt games1.txt games2.txt games3.txt
+
+  If the form above doesn't work, the gem may not be installed correctly.
+  As a workaround, from the project directory you can use
+  $ bundle exec ruby -I lib bin/#{executable_name}  -o './junk-out.txt' './sample-input.txt'
         END
 
         opts.separator ""
