@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'minitest/unit'
 require 'minitest/autorun'
 require_relative '../lib/bs_team_ranker/bs_optparse'
 
-class BsOptparseTest < MiniTest::Unit::TestCase
+class BsOptparseTest < MiniTest::Test
 
   def test_parse_short_flag
     test_argv = ['-o', './my-output.txt', './games-a.txt']

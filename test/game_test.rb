@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'minitest/unit'
+require 'minitest/autorun'
 require_relative '../lib/bs_team_ranker/game'
 
-class GameTest < MiniTest::Unit::TestCase
+class GameTest < MiniTest::Test
 
   def test_new_sets_game_teams
     # test 0 teams

@@ -1,11 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'minitest/unit'
 require 'minitest/autorun'
 require_relative '../lib/bs_team_ranker/league_controller'
 require_relative 'bs_test_constants'
 
-class LeagueControllerTest < MiniTest::Unit::TestCase
+class LeagueControllerTest < MiniTest::Test
 
   def test_new_sets_games
     league_controller = BsTeamRanker::LeagueController.new

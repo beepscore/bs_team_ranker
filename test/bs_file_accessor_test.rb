@@ -1,11 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'minitest/unit'
 require 'minitest/autorun'
 require_relative '../lib/bs_team_ranker/bs_file_accessor'
 require_relative 'bs_test_constants'
 
-class BsFileAccessorTest < MiniTest::Unit::TestCase
+class BsFileAccessorTest < MiniTest::Test
 
   def test_string_from_file_sets_file_encoding
     # Terminal file command shows
