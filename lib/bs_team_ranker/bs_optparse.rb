@@ -23,12 +23,13 @@ module BsTeamRanker
       options = OpenStruct.new
       options.output_file_name = OUTPUT_FILE_NAME_DEFAULT
 
+      executable_name = File.basename($PROGRAM_NAME)
       opt_parser = OptionParser.new do |opts|
         opts.banner = <<-END
 Usage:
-  bs_team_ranker.rb [options] input_file_name1 input_file_name2...
+  $ bundle exec #{executable_name} [options] input_file_name1 input_file_name2...
 Example:
-  bs_team_ranker.rb -o my_ranks.txt games1.txt games2.txt games3.txt
+  $ bundle exec #{executable_name} -o my_ranks.txt games1.txt games2.txt games3.txt
         END
 
         opts.separator ""
