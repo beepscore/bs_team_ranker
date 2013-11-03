@@ -3,8 +3,13 @@
 require 'minitest/autorun'
 require_relative '../lib/bs_team_ranker/bs_file_accessor'
 require_relative 'bs_test_constants'
+require_relative 'bs_os_detector'
 
 class BsFileAccessorTest < MiniTest::Test
+
+  def setup
+    @os = BsOsDetector.os
+  end
 
   def test_string_from_file_sets_file_encoding
     # Terminal file command shows
@@ -20,38 +25,41 @@ class BsFileAccessorTest < MiniTest::Test
     # sample-input-utf8.txt: UTF-8 Unicode text
 
     file_accessor = BsTeamRanker::BsFileAccessor.new
-    file_accessor.string_from_file('./sample-input.txt', 'ascii')
-    actual_result = file_accessor.file_encoding
-    expected_result = Encoding.find('US-ASCII')
-    assert_equal(expected_result, actual_result)
+    file_accessor.string_from_file('./sample-input.txt', nil)
+    expected_result = nil
+    if (:windows == @os)
+      expected_result = Encoding.find('IBM437')
+    else
+      expected_result = Encoding.find('UTF-8')
+    end
+    assert_equal(expected_result, file_accessor.file_encoding)
 
     file_accessor = BsTeamRanker::BsFileAccessor.new
-    file_accessor.string_from_file('./sample-input.txt', 'utf-8')
-    actual_result = file_accessor.file_encoding
-    expected_result = Encoding.find('UTF-8')
-    assert_equal(expected_result, actual_result)
-
-    # this throws error
-    # Encoding::InvalidByteSequenceError: "\xC3" on US-ASCII
-    # file_accessor = BsTeamRanker::BsFileAccessor.new
-    # file_accessor.string_from_file('./sample-input-utf8.txt', 'ascii')
+    file_accessor.string_from_file('./sample-input-utf8.txt', nil)
+    expected_result = nil
+    if (:windows == @os)
+      expected_result = Encoding.find('IBM437')
+    else
+      expected_result = Encoding.find('UTF-8')
+    end
+    assert_equal(expected_result, file_accessor.file_encoding)
 
     file_accessor = BsTeamRanker::BsFileAccessor.new
-    file_accessor.string_from_file('./sample-input-utf8.txt', 'utf-8')
+    file_accessor.string_from_file('./sample-input.txt', 'UTF-8')
     expected_result = Encoding.find('UTF-8')
-    assert_equal(expected_result, actual_result)
+    assert_equal(expected_result, file_accessor.file_encoding, "expect UTF-8 for any OS")
   end
 
   def test_string_from_file_returns_string
 
     file_accessor = BsTeamRanker::BsFileAccessor.new
-    actual_result = file_accessor.string_from_file('./sample-input.txt', 'utf-8')
+    actual_result = file_accessor.string_from_file('./sample-input.txt', nil)
     puts
     puts "file_string: #{actual_result}"
     assert_equal(GAMES_STRING_ASCII, actual_result)
 
     file_accessor = BsTeamRanker::BsFileAccessor.new
-    actual_result = file_accessor.string_from_file('./sample-input-utf8.txt', 'utf-8')
+    actual_result = file_accessor.string_from_file('./sample-input-utf8.txt', nil)
     puts
     puts "file_string: #{actual_result}"
     assert_equal(GAMES_STRING_UTF8, actual_result)

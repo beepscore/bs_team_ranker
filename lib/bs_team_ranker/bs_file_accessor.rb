@@ -10,36 +10,37 @@ module BsTeamRanker
     end
 
     # read a file and return a string
-    def string_from_file(file_name, external_encoding)
+    # param an_external_encoding. If nil use default external encoding
+    #
+    # |os      |  default_external encoding |
+    # |------- | -------------------------- |
+    # |macosx  |  UTF-8                     |
+    # |windows |  IBM437                    |
+    # You can see this from irb
+    # $ irb
+    # irb(main):001:0> Encoding.default_external
+    # => <Encoding:UTF-8>
+    # http://www.ruby-doc.org/core-2.0.0/IO.html#method-c-new
+    # http://www.ruby-doc.org/core-2.0.0/Encoding.html
+    #
+    def string_from_file(file_name, an_external_encoding)
       @file_name = file_name
 
-      # ruby 1.9.3 and ruby 2.0 default_external encoding is UTF-8
-      # You can see this from irb
-      # $ irb
-      # irb(main):001:0> Encoding.default_external
-      # => <Encoding:UTF-8>
-
-      # https://www.ruby-lang.org/en/news/2013/02/24/ruby-2-0-0-p0-is-released/
-      # default internal_encoding is nil. set it.
-      internal_encoding = "utf-8"
-      if (external_encoding == internal_encoding)
-        # avoid ruby warning:
-        # Ignoring internal encoding utf-8: it is identical to external encoding utf-8
-        read_access_and_encoding = "r"
+      file = nil
+      if (an_external_encoding.nil?)
+        # don't specify external encoding, just use default
+        file = File.open(@file_name, 'r')
       else
-        read_access_and_encoding = "r:#{external_encoding}:#{internal_encoding}"
+        file = File.open(@file_name, "r:#{an_external_encoding}")
       end
+
+      @file_encoding = file.external_encoding
 
       file_string = ""
-      # at end of block, file will be closed automatically
-      File.open(@file_name, read_access_and_encoding) do |file|
-
-        @file_encoding = file.external_encoding
-
-        file.each_line do |line|
-          file_string += line
-        end
+      file.each_line do |line|
+        file_string += line
       end
+      file.close
 
       file_string
     end

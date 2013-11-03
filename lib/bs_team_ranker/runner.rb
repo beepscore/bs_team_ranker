@@ -27,7 +27,7 @@ module BsTeamRanker
       league_controller = BsTeamRanker::LeagueController.new
       @input_file_names.each do |infile|
         puts "Adding games #{infile}"
-        games_string = file_accessor.string_from_file(infile, 'utf-8')
+        games_string = file_accessor.string_from_file(infile, nil)
         league_controller.add_games(games_string)
       end
 
