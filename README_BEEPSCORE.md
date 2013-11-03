@@ -27,7 +27,7 @@ The app uses bundler to specify it's dependency gem versions.
 
 ### See command line help for further instructions
     $ cd <path>/bs_team_ranker
-    $ bundle exec bin/bs_team_ranker -h
+    $ bundle exec bs_team_ranker -h
 
 ---
 
