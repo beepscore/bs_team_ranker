@@ -59,7 +59,7 @@ class BsFileAccessorTest < MiniTest::Test
     assert_equal(GAMES_STRING_ASCII, actual_result)
 
     file_accessor = BsTeamRanker::BsFileAccessor.new
-    actual_result = file_accessor.string_from_file('./sample-input-utf8.txt', nil)
+    actual_result = file_accessor.string_from_file('./sample-input-utf8.txt', 'UTF-8')
     puts
     puts "file_string: #{actual_result}"
     assert_equal(GAMES_STRING_UTF8, actual_result)
