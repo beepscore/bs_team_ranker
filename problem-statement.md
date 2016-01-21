@@ -8,11 +8,6 @@ What we look for
 ----------------
 We will be looking at the quality and professionalism of your work. In particular we look for clean, well-designed, maintainable code. Although this is a rather small task, it should be approached as you would an actual task for a customer.
 
-When you are finished
-----------------------
-Please push your solution to the master branch in the provided github repository.
-There is no need to fork this repository to your own github account.
-
 The Problem
 ===========
 We want you to create a command-line application that will calculate the ranking table for a soccer league.
