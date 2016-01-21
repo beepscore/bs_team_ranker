@@ -2,11 +2,14 @@
 Describe how to install and use bs_team_ranker.
 
 # References
+This is a solution to a coding exercise.
+For more info see problem-statement.md
+
 <http://bundler.io>
 
 # Requirements
-Ruby 2.0.0
-bundler (~> 1.3)
+bundler
+see Gemfile, bs_team_ranker.gemspec
 
 # Installation Instructions
 
@@ -14,7 +17,7 @@ bundler (~> 1.3)
 e.g. Clone git repository from github.
 
 ## Install gem dependencies
-The app uses bundler to specify it's dependency gem versions.
+The app uses bundler to specify its dependency gem versions.
 
     $ cd <path>/bs_team_ranker
     $ bundle install --deployment
