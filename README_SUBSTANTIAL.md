@@ -1,9 +1,8 @@
-Thank you for your interest in Substantial.
+Problem Statement
 ===========================================
-
 This is a small problem that we would like you to solve so that we can get an idea of your coding ability.
 Your submission will be run in a clean environment to see if it produces the expected output. 
-Please be sure to provide instructions for installing any dependancies.
+Please be sure to provide instructions for installing any dependencies.
 
 What we look for
 ----------------
@@ -49,7 +48,3 @@ Platform support
 This will be run in a unix-ish environment (OS X).
 If you choose to use a compiled language, please keep this in mind.
 Please use platform-agnostic constructs where possible (line-endings and file-path-separators are two problematic areas).
-
-Questions?
-----------
-Please email jobs+coding-test@substantial.com if you have any questions.
