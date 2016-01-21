@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 
 # Need this for $ bundle platform command to show ruby version
 # $ bundle platform doesn't see the similar entry in bs_team_ranker.gemspec
-ruby '2.0.0'
+ruby '2.2.3'
 
 # Specify your gem's dependencies in bs_team_ranker.gemspec
 gemspec

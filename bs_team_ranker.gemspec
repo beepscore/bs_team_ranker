@@ -22,9 +22,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "minitest", "~>5.0"
 
-  # Only with ruby 2.0.x
+  # Only with ruby 2.2.x
   # Reference
   # http://guides.rubygems.org/specification-reference/
-  spec.required_ruby_version = '~> 2.0'
+  spec.required_ruby_version = '~> 2.2'
 
 end
