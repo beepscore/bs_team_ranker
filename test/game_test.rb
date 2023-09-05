@@ -69,7 +69,7 @@ class GameTest < MiniTest::Test
 
   def test_score_max
     game = BsTeamRanker::Game.new(nil)
-    assert_equal(nil, game.score_max(game.game_teams))
+    assert_nil(game.score_max(game.game_teams))
 
     game = BsTeamRanker::Game.new('Tarantulas 3, Snakes 1')
     assert_equal(3, game.score_max(game.game_teams))
