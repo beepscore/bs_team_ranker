@@ -1,0 +1,25 @@
+PATH
+  remote: .
+  specs:
+    bs_team_ranker (0.0.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.16.3)
+    rake (13.0.6)
+
+PLATFORMS
+  x86_64-darwin-22
+
+DEPENDENCIES
+  bs_team_ranker!
+  bundler (~> 2.4.10)
+  minitest (~> 5.16.3)
+  rake
+
+RUBY VERSION
+   ruby 3.2.2p53
+
+BUNDLED WITH
+   2.4.10
