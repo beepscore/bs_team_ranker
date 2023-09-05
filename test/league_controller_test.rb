@@ -117,7 +117,7 @@ class LeagueControllerTest < MiniTest::Test
     fc_awesome = league_controller.teams['FC Awesome'.to_sym]
     grouches = league_controller.teams['Grouches'.to_sym]
     áƏĭö = league_controller.teams['áƏĭö'.to_sym]
-    ƩƿƔƸȢ = league_controller.teams['ƩƿƔƸȢ'.to_sym]
+    team_ƩƿƔƸȢ = league_controller.teams['ƩƿƔƸȢ'.to_sym]
     furry_bears = league_controller.teams['Furry Bears'.to_sym]
 
     assert_equal([1, 2, 0, 5], [lions.won, lions.tied, lions.lost, lions.points])
@@ -126,7 +126,7 @@ class LeagueControllerTest < MiniTest::Test
     assert_equal([0, 1, 1, 1], [fc_awesome.won, fc_awesome.tied, fc_awesome.lost, fc_awesome.points])
     assert_equal([0, 0, 1, 0], [grouches.won, grouches.tied, grouches.lost, grouches.points])
     assert_equal([0, 0, 1, 0], [áƏĭö.won, áƏĭö.tied, áƏĭö.lost, áƏĭö.points])
-    assert_equal([1, 0, 0, 3], [ƩƿƔƸȢ.won, ƩƿƔƸȢ.tied, ƩƿƔƸȢ.lost, ƩƿƔƸȢ.points])
+    assert_equal([1, 0, 0, 3], [team_ƩƿƔƸȢ.won, team_ƩƿƔƸȢ.tied, team_ƩƿƔƸȢ.lost, team_ƩƿƔƸȢ.points])
     assert_equal([0, 0, 1, 0], [furry_bears.won, furry_bears.tied, furry_bears.lost, furry_bears.points])
   end
 
