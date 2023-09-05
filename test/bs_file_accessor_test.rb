@@ -67,15 +67,15 @@ class BsFileAccessorTest < MiniTest::Test
 
   def test_write
     # clean up before opening file
-    if File.exists?('./junk.txt')
+    if File.exist?('./junk.txt')
       File.delete('./junk.txt')
     end
-    assert(!File.exists?('./junk.txt'))
+    assert(!File.exist?('./junk.txt'))
 
     file_accessor = BsTeamRanker::BsFileAccessor.new
     file_accessor.write(GAMES_STRING_ASCII, './junk.txt')
 
-    assert(File.exists?('./junk.txt'))
+    assert(File.exist?('./junk.txt'))
 
     # On OS X in terminal, output file shows as us-ascii
     # $ file -I junk.txt
@@ -84,15 +84,15 @@ class BsFileAccessorTest < MiniTest::Test
 
   def test_write_utf8
     # clean up before opening file
-    if File.exists?('./junk-utf8.txt')
+    if File.exist?('./junk-utf8.txt')
       File.delete('./junk-utf8.txt')
     end
-    assert(!File.exists?('./junk-utf8.txt'))
+    assert(!File.exist?('./junk-utf8.txt'))
 
     file_accessor = BsTeamRanker::BsFileAccessor.new
     file_accessor.write(GAMES_STRING_UTF8, './junk-utf8.txt')
 
-    assert(File.exists?('./junk-utf8.txt'))
+    assert(File.exist?('./junk-utf8.txt'))
 
     # On OS X in terminal, output file shows as utf-8
     # $ file -I junk-utf8.txt
